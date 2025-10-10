@@ -76,7 +76,7 @@ html, body, [class*="css"]  {
 
 # -------------------- Sidebar --------------------
 with st.sidebar:
-    st.image("exl logo.png", width ='stretch')
+    st.image("exl logo.png", use_container_width=True)
     selected_screen = st.radio("📁 Navigation", [
         "📊 Model Recommendations", 
         "📊 Reviewed Claims",
