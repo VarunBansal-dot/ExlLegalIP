@@ -7,7 +7,7 @@ import os
 import tempfile
 from report_generator import generate_demand_letter_from_text, create_demand_package_final_reports, create_internal_final_reports
 import base64
-from llm_processing import OPENAI_API_KEY, llm
+from llm_processing import llm
 import shutil
 import time
 
@@ -21,6 +21,7 @@ USER_CREDENTIALS = {
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
     st.session_state.username = ""
+
 
 def login():
     st.image("exl logo.png", use_container_width=True)
@@ -38,167 +39,300 @@ def login():
         else:
             st.error("❌ Invalid username or password")
 
+
 if not st.session_state.logged_in:
     login()
     st.stop()
-
 # -------------------- App Config and Style --------------------
 st.set_page_config(page_title="Litigation Dashboard", layout="wide")
 
-st.markdown("""
-    <style>
-        .stApp { background-color: #FFFFFF; color: black; }
-        section[data-testid="stSidebar"] { background-color: #F5F5F5 !important; color: black !important; }
-        * { color: black !important; }
-        div[data-baseweb="select"], div[data-baseweb="popover"], div[data-baseweb="option"], div[data-baseweb="menu"] {
-            background-color: white !important; color: black !important; border: 1px solid #ccc !important; border-radius: 5px !important;
-        }
-        div[data-baseweb="option"]:hover, div[data-baseweb="option"][aria-selected="true"] {
-            background-color: #e6e6e6 !important;
-        }
-        .stButton > button {
-            background-color: white !important; color: black !important; border: 1px solid #ccc !important; border-radius: 5px !important;
-        }
-        .stButton > button:hover {
-            background-color: #e6e6e6 !important;
-        }
-    </style>
-""", unsafe_allow_html=True)
+# --- Universal CSS ---
 st.markdown("""
 <style>
-/* Allow full page scroll instead of clipped layout */
-html, body, [class*="css"]  {
-    height: auto !important;
-    overflow: auto !important;
+
+/* ======================= */
+/* GLOBAL BASE STYLES */
+/* ======================= */
+header[data-testid="stHeader"], footer {
+    visibility: hidden !important;
+    height: 0 !important;
 }
+html, body, [class*="css"] {
+    height: 100% !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
+/* ======================= */
+/* PERMANENT FIXED SIDEBAR */
+/* ======================= */
+
+    
+    /* --- Hide and disable the sidebar collapse ("<<") button --- */
+
+/* Target the exact div shown in your screenshot */
+div[data-testid="stSidebarCollapseButton"] {
+    display: none !important;           /* hide the container */
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* Additionally, ensure the button inside is disabled even if rendered */
+div[data-testid="stSidebarCollapseButton"] button {
+    pointer-events: none !important;
+    opacity: 0 !important;              /* make invisible */
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+}
+
+/* Optional: fix sidebar to stay open */
+section[data-testid="stSidebar"] {
+    transform: none !important;
+    visibility: visible !important;
+    width: 280px !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    height: 100vh !important;
+    background-color: #F8F9FA !important;
+    border-right: 1px solid #E0E0E0 !important;
+    z-index: 1000 !important;
+}
+
+
+/* ======================= */
+/* FIXED TOP BANNER */
+/* ======================= */
+.top-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(90deg, #185a9d, #0073e6);
+    color: white;
+    padding: 0 40px 0 320px; /* offset for sidebar width */
+    z-index: 900;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Banner text styling */
+.banner-center {
+    font-size: 26px;
+    font-weight: 700;
+    text-align: center;
+    flex: 1;
+}
+.banner-right {
+    font-size: 16px;
+    font-weight: 500;
+    text-align: right;
+}
+
+/* ======================= */
+/* MAIN CONTENT AREA */
+/* ======================= */
+.block-container {
+    position: relative !important;
+    padding-top: 90px !important; /* space below banner */
+    margin-left: 280px !important; /* permanent sidebar offset */
+    width: calc(100vw - 280px) !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+}
+
+/* ======================= */
+/* BUTTON STYLES */
+/* ======================= */
+.stButton > button {
+    background-color: #E3F2FD !important;
+    color: #0047AB !important;
+    border: 1px solid #E3F2FD !important;
+    border-radius: 10px !important;
+    padding: 0.5rem 1rem !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+}
+.stButton > button:hover {
+    background-color: #BBDEFB !important;
+    color: #003580 !important;
+    border-color: #90CAF9 !important;
+}
+
+
+
 </style>
 """, unsafe_allow_html=True)
+# --- TOP BANNER HTML ---
+st.markdown(f"""
+<div class="top-banner">
+    <div class="banner-center">
+        Litigation Action & Insights Desk
+    </div>
+    <div class="banner-right">
+        Welcome, {st.session_state.get("username", "User")}
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+
+# -------------------- Main Content Wrapper --------------------
+with st.container():
+    st.markdown('<div class="main-content">', unsafe_allow_html=True)
 
 # -------------------- Sidebar --------------------
-with st.sidebar:
-    st.image("exl logo.png", use_container_width=True)
-    selected_screen = st.radio("📁 Navigation", [
-        "📊 Model Recommendations", 
-        "📊 Reviewed Claims",
-        #"📑 Subrogation Workbench",
-        #"🧠 Q&A Assistant", 
-        "📊 Monitoring Dashboard",
-        #"📈 Litigation KPIs"
-    ])
+    with st.sidebar:
+        st.image("exl logo.png", use_container_width=True)
+        selected_screen = st.radio("Navigation", [
+            "Model Recommendations",
+            "Reviewed Claims",
+            # "📑 Subrogation Workbench",
+            # "🧠 Q&A Assistant",
+            "Monitoring Dashboard",
+            # "📈 Litigation KPIs"
+        ])
 
+    # -------------------- Load Data --------------------
+    # data_path = 'claims_only_Data.csv'
+    # data_path = "Syntheticdataset_litigation.csv"
+    data_path = "merged_file_1.csv"
+    Notes_path = "Notes1.csv"
 
-# -------------------- Load Data --------------------
-# data_path = 'claims_only_Data.csv'
-#data_path = "Syntheticdataset_litigation.csv"
-data_path = "merged_file_1.csv"
-Notes_path = "Notes1.csv"
-@st.cache_data(ttl=0)
-def load_data():
-    cdf = pd.read_csv(data_path)
-    ndf = pd.read_csv(Notes_path,sep =',')
-    df = cdf.merge(ndf[['Claim_Number','Claims_Notes','Summary']],how='left',on= 'Claim_Number')
-    
+    @st.cache_data(ttl=0)
+    def load_data():
+        cdf = pd.read_csv(data_path)
+        ndf = pd.read_csv(Notes_path, sep=',')
+        df = cdf.merge(ndf[['Claim_Number', 'Claims_Notes',
+                       'Summary']], how='left', on='Claim_Number')
 
-    df['ML_SCORE'] = round(df['ML_SCORE'], 2) 
-   
-    if 'User_Action' not in df.columns:
-        df['User_Action'] = ''
-    if 'User_Action_Details' not in df.columns:
-        df['User_Action_Details'] = ''
-    return df
+        df['ML_SCORE'] = round(df['ML_SCORE'], 2)
 
-df = load_data()
-#df = df[df['Reviewed']==0]
-action_detail_mapping = {
-                    "Awaiting Additional Info":["Choose an option","Field Report","Inspection Report","Medical Report","Police Report","Property Images","Pending Demand","Pending Counter to Offer"],
-                    "Dismiss":["Choose an option","Adequate Reserve","Already Settled","Already with Expert","Already with LL/MCU","Already with SIU","Improper Alert","Arbitration for UM/UIM in this State","ADR"],
-                    "Engage an Expert":[],
-                    "Increase Reserve":[],
-                    "Refer to Large Loss":[],
-                    "Refer to SIU":[],
-                    "Settle":[],
-                    "Additional Authority Granted":[],
-                    "In Litigation":["Transfer Notice to New UM"],
-                    "In Negotiations":[],
-                    "Requesting Mediation":[]
-                }
-# # Directories you want to clear
-# DIR1 = "processed_claims"
-# DIR2 = "uploaded_claims"
+        if 'User_Action' not in df.columns:
+            df['User_Action'] = ''
+        if 'User_Action_Details' not in df.columns:
+            df['User_Action_Details'] = ''
+        return df
 
-# def clear_directory(dir_path):
-#     """Remove all files and subfolders inside a directory."""
-#     if os.path.exists(dir_path):
-#         for item in os.listdir(dir_path):
-#             item_path = os.path.join(dir_path, item)
-#             try:
-#                 if os.path.isfile(item_path) or os.path.islink(item_path):
-#                     os.remove(item_path)
-#                 elif os.path.isdir(item_path):
-#                     shutil.rmtree(item_path)
-#             except Exception as e:
-#                 st.error(f"Error deleting {item_path}: {e}")
+    df = load_data()
+    # df = df[df['Reviewed']==0]
+    action_detail_mapping = {
+        "Awaiting Additional Info": ["Choose an option", "Field Report", "Inspection Report", "Medical Report", "Police Report", "Property Images", "Pending Demand", "Pending Counter to Offer"],
+        "Dismiss": ["Choose an option", "Adequate Reserve", "Already Settled", "Already with Expert", "Already with LL/MCU", "Already with SIU", "Improper Alert", "Arbitration for UM/UIM in this State", "ADR"],
+        "Engage an Expert": [],
+        "Increase Reserve": [],
+        "Refer to Large Loss": [],
+        "Refer to SIU": [],
+        "Settle": [],
+        "Additional Authority Granted": [],
+        "In Litigation": ["Transfer Notice to New UM"],
+        "In Negotiations": [],
+        "Requesting Mediation": []
+    }
 
-# # Sidebar Reset Button
-# st.sidebar.subheader("⚙️ Settings")
-# if st.sidebar.button("🔄 Reset App"):
-#     clear_directory(DIR1)
-#     clear_directory(DIR2)
-#     st.sidebar.success("✅ All data cleared from directories!")
-#     st.rerun()   # refresh app after reset
+    # ---------------------Resetting Directories--------------
+    # # Directories you want to clear
+    # DIR1 = "processed_claims"
+    # DIR2 = "uploaded_claims"
 
+    # def clear_directory(dir_path):
+    #     """Remove all files and subfolders inside a directory."""
+    #     if os.path.exists(dir_path):
+    #         for item in os.listdir(dir_path):
+    #             item_path = os.path.join(dir_path, item)
+    #             try:
+    #                 if os.path.isfile(item_path) or os.path.islink(item_path):
+    #                     os.remove(item_path)
+    #                 elif os.path.isdir(item_path):
+    #                     shutil.rmtree(item_path)
+    #             except Exception as e:
+    #                 st.error(f"Error deleting {item_path}: {e}")
 
+    # # Sidebar Reset Button
+    # st.sidebar.subheader("⚙️ Settings")
+    # if st.sidebar.button("🔄 Reset App"):
+    #     clear_directory(DIR1)
+    #     clear_directory(DIR2)
+    #     st.sidebar.success("✅ All data cleared from directories!")
+    #     st.rerun()   # refresh app after reset
+
+    st.markdown("</div>", unsafe_allow_html=True)
 
 # -------------------- 📊 Dashboard Screen --------------------
 
-if selected_screen == "📊 Model Recommendations":
+if selected_screen == "Model Recommendations":
     st.title("Litigation Propensity Claims Dashboard")
     df = load_data()
-    df = df[df['Reviewed']==0]
-    # # Toggle filters
+    df = df[df['Reviewed'] == 0]
     st.markdown("""
-            <style>
-            div[data-testid="stCheckbox"] {
-                display: flex;
-                height: 80px; 
-                flex-direction: row; 
-                white-space: nowrap; 
-                font-size: 20px;  
-                           
-            }
+                    <div style='text-align:left; height: 40px; margin-bottom: 8px ;margin-top:10px; font-size: 20px'>
+                        <b>Filter & Search Panel</b>
+                    </div>""", unsafe_allow_html=True)
+    # --- Create a wrapper DIV for your filter section ---
+    st.markdown('<div id="filter-section">', unsafe_allow_html=True)
+    filter_cols = st.columns(3)
+    st.markdown("""
+                    <style>
+                    /* Align selectboxes and text_input in a single line */
+                    #filter-section div[data-testid="stTextInput"] label,
+                    #filter-section div[data-testid="stSelectbox"] label {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-weight: 600;
+                        color: #333;
 
-            </style>
-            """, unsafe_allow_html=True)
-    enable_filters = st.checkbox("🔎 Enable Filters", value=True)
-    claim_search = st.text_input("🔍 Search by Claim Number", key="claim_search")
-    if enable_filters:
-        st.markdown("""
-        <div style='text-align:left; height: 80px; margin-bottom: 6px;font-size: 24px'>
-            <b>🛠️ Apply Filters</b>
-        </div>""", unsafe_allow_html=True)
-        filter_cols = st.columns(2)
-        
-        with filter_cols[0]:
-            peril_filter = st.selectbox("INCIDENT CAUSE", [" "] + list(df['COL_CD'].unique()), key='peril_filter')
+                    }
 
-        with filter_cols[1]:
-            sub_det = st.selectbox("LOB SUB-LOB", [" "] + list(df['SUB_DTL_DESC'].unique()), key='sub_det_filter')
+                    /* Reduce top margin/padding of Streamlit inputs */
+                    #filter-section div[data-testid="stTextInput"], 
+                    #filter-section div[data-testid="stSelectbox"] {
+                        margin-top: -50px !important;
+                    }
 
-        # Apply filters
-        filtered_df = df.copy()
-        if peril_filter != " ":
-            filtered_df = filtered_df[filtered_df['COL_CD'] == peril_filter]
-        if sub_det != " ":
-            filtered_df = filtered_df[filtered_df['SUB_DTL_DESC'] == sub_det]
-    else:
-        filtered_df = df.copy()
+                    /* Keep input box heights consistent */
+                    #filter-section div[data-testid="stTextInput"] input,
+                    #filter-section div[data-testid="stSelectbox"] select {
+                        height: 40px !important;
+                        padding: 0px 8px !important;
+                    }
+                    </style>
+                """, unsafe_allow_html=True)
+
+    with filter_cols[0]:
+        peril_filter = st.selectbox(
+            "INCIDENT CAUSE", [" "] + list(df['COL_CD'].unique()), key='peril_filter')
+
+    with filter_cols[1]:
+        sub_det = st.selectbox(
+            "LOB SUB-LOB", [" "] + list(df['SUB_DTL_DESC'].unique()), key='sub_det_filter')
+    with filter_cols[2]:
+        claim_search = st.text_input("SEARCH CLAIM NUMBER", key="claim_search")
+
+    # Apply filters
+    filtered_df = df.copy()
+    if peril_filter != " ":
+        filtered_df = filtered_df[filtered_df['COL_CD'] == peril_filter]
+    if sub_det != " ":
+        filtered_df = filtered_df[filtered_df['SUB_DTL_DESC'] == sub_det]
+
+        # filtered_df = df.copy()
 
     # Apply claim number search if entered
     if claim_search.strip():
-        filtered_df = filtered_df[filtered_df['Claim_Number'].astype(str).str.contains(claim_search.strip(), case=False)]
+        filtered_df = filtered_df[filtered_df['Claim_Number'].astype(
+            str).str.contains(claim_search.strip(), case=False)]
 
     # suspicious_df = filtered_df[filtered_df['Prediction'] == 1].copy()
-    suspicious_df = filtered_df.sort_values(by=['ML_SCORE'],ascending=False)
+    suspicious_df = filtered_df.sort_values(by=['ML_SCORE'], ascending=False)
+# --- Close the wrapper DIV ---
+    st.markdown('</div>', unsafe_allow_html=True)
 
     # Download filtered suspicious claims
     if not suspicious_df.empty:
@@ -212,56 +346,54 @@ if selected_screen == "📊 Model Recommendations":
         )
 
     if suspicious_df.empty:
-        st.info("⚠️ No suspected litigated claims found with current filters or search.")
+        st.info(
+            "⚠️ No suspected litigated claims found with current filters or search.")
     else:
-        st.subheader("📋 Review and Act on Each Suspected Claim")
+        st.subheader("Claims Pending Review & Action")
 
         for idx, row in suspicious_df.iterrows():
             st.markdown("---")
-            cols = st.columns([2.2, 3.8, 1.8, 4.2, 3.3, 2.2, 1.8,4.0,4.0,3.0])
+            cols = st.columns(
+                [2.2, 3.8, 1.8, 4.2, 3.3, 2.2, 1.8, 4.0, 4.0, 3.0])
 
-            with cols[0]: st.markdown(f"**Claim:** {row['Claim_Number']}")
-            with cols[1]: st.markdown(f"**Incident Cause:** {row['COL_CD']}")
-            with cols[2]: st.markdown(f"**State:** {row['FTR_JRSDTN_ST_ABBR']}")
-            #with cols[3]: st.markdown(f"**Paid:** ${row['PAID_FINAL']:.2f}")
-            #with cols[3]: st.markdown(f"**Accident City:** {row['ACDNT_CITY']}")
-            with cols[3]: st.markdown(f"**Body Part Injured:** {row['BODY_PART_INJD_DESC']}")
-            with cols[4]: st.markdown(f"**Loss Party:** {row['LOSS_PARTY']}")
-            #with cols[7]: st.markdown(f"**Severity:** {row['CLM_LOSS_SEVERITY_CD']}")
-            with cols[5]: st.markdown(f"**ML Score:** {row['ML_SCORE']}")
+            with cols[0]:
+                st.markdown(f"**Claim:** {row['Claim_Number']}")
+            with cols[1]:
+                st.markdown(f"**Incident Cause:** {row['COL_CD']}")
+            with cols[2]:
+                st.markdown(f"**State:** {row['FTR_JRSDTN_ST_ABBR']}")
+            with cols[3]:
+                st.markdown(
+                    f"**Body Part Injured:** {row['BODY_PART_INJD_DESC']}")
+            with cols[4]:
+                st.markdown(f"**Loss Party:** {row['LOSS_PARTY']}")
+            with cols[5]:
+                st.markdown(f"**ML Score:** {row['ML_SCORE']}")
 
             # --- New Column for Notes Summary Toggle ---
             with cols[6]:
-                st.markdown("**Notes**") 
-                st.markdown(
-                        """
-                        <style>
-                        div[data-testid="stCheckbox"] {
-                            margin-top: -46px;
-                            margin-left: 6px;
-                            width: 120px !important;
-                            height: 50px !important;
-                            display: flex;
-                        }
-                        </style>
-                        """,
-                        unsafe_allow_html=True
-                        )
-                
+                st.markdown("**Notes**")
+                st.markdown("""
+                                <style>
+                                div[data-testid="stCheckbox"] 
+                                {
+                                    margin-top: -46px;
+                                    margin-left: 6px;
+                                    width: 120px !important;
+                                    height: 50px !important;
+                                    display: flex;
+                                }
+                                </style>
+                            """, unsafe_allow_html=True
+                            )
 
                 show_summary = st.toggle("", key=f"notes_toggle_{idx}")
-            # if show_summary:
-            #     st.text_area(
-            #         "Claim Notes Summary",
-            #         value=row.get("Summary", "No summary available."),
-            #         height=500,
-            #         key=f"notes_area_{idx}"
-            #     )
+
             if show_summary:
                 with st.spinner("Generating summary using LLM..."):
-                # Pass the claim notes (or whatever column contains raw notes)
+                    # Pass the claim notes (or whatever column contains raw notes)
                     summary_text = llm(row['Claims_Notes'])
-            
+
                     st.text_area(
                         "Claim Notes Summary",
                         value=summary_text,
@@ -269,191 +401,153 @@ if selected_screen == "📊 Model Recommendations":
                         key=f"notes_area_{idx}"
                     )
 
-
-
-
+            # --- ACTION COLUMN ---
             with cols[7]:
-                st.markdown("""
-        <div style='text-align:center; height: 30px; margin-bottom: 4px;'>
-            <b>Action</b>
-        </div>
-        """, unsafe_allow_html=True)
-                st.markdown("""
-        <style>
-        div[data-testid="stSelectbox"]{
-            display: flex;
-            flex-direction: column;
-            margin-top: -50px;
-            align-items: center;      /* Centers horizontally */
-            justify-content: center;
-       
-        }
-       
-        </style>
-        """, unsafe_allow_html=True)
+                # Label above dropdown
+                st.markdown(
+                    """
+                    <div id="action-section" style='text-align:center; margin-bottom:2px;'>
+                        <b>Action</b>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+
                 action_options = [
-    "",
-    "Awaiting Additional Info",
-    "Dismiss",
-    "Engage an Expert",
-    "Increase Reserve",
-    "Refer to Large Loss",
-    "Refer to SIU",
-    "Settle",
-    "Additional Authority Granted",
-    "In Litigation",
-    "In Negotiations",
-    "Requesting Mediation"
-]
-               
-                # Get current user action safely
-                user_action_value = row.get("User_Action")
-                # Show the prefilled suggestion (grey hint text)
-                # Determine default index safely
-                if user_action_value in action_options:
-                    default_index = action_options.index(user_action_value)
-                else:
-                    default_index = 0  # fallback to blank if invalid or missing
-               
-                # Render dropdown
-                selected_action = st.selectbox(
                     "",
-                    action_options,
+                    "Awaiting Additional Info",
+                    "Dismiss",
+                    "Engage an Expert",
+                    "Increase Reserve",
+                    "Refer to Large Loss",
+                    "Refer to SIU",
+                    "Settle",
+                    "Additional Authority Granted",
+                    "In Litigation",
+                    "In Negotiations",
+                    "Requesting Mediation"
+                ]
+
+                # Determine default index safely
+                user_action_value = row.get("User_Action")
+                default_index = action_options.index(
+                    user_action_value) if user_action_value in action_options else 0
+
+                # Render Action dropdown
+                selected_action = st.selectbox(
+                    label="",
+                    options=action_options,
                     key=f"action_{idx}",
-                    index=default_index
-    )
-                # selected_action = st.selectbox(
-                #     "",
-                #     ["", "Awaiting Additional Info", "Dismiss", "Engage an Expert","Increase Reserve","Refer to Large Loss","Refer to SIU","Settle","Additional Authority Granted","In Litigation","In Negotiations","Requesting Mediation"],
-                #     key=f"action_{idx}",
-                #     index=["", "Awaiting Additional Info", "Dismiss", "Engage an Expert","Increase Reserve","Refer to Large Loss","Refer to SIU","Settle","Additional Authority Granted","In Litigation","In Negotiations","Requesting Mediation"].index(row['User_Action']) if row['User_Action'] in ["", "Awaiting Additional Info", "Dismiss", "Engage an Expert","Increase Reserve","Refer to Large Loss","Refer to SIU","Settle","Additional Authority Granted","In Litigation","In Negotiations","Requesting Mediation"] else 0
-                # )
-            
+                    index=default_index,
+                    label_visibility="collapsed"
+                )
 
-                
-                # --- ACTION DETAILS dropdown (depends on Action) ---
-                with cols[8]:
-    #  Center the label properly
-                            st.markdown("""
-        <div style='text-align:center; height: 30px; margin-bottom: 4px;'>
-            <b>Action Details</b>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    # Add CSS once (to center dropdown itself)
-                            st.markdown("""
-        <style>
-        div[data-testid="stSelectbox"]{
-            display: flex;
-            flex-direction: column;
-            margin-top: -50px;
-            align-items: center;      /* Centers horizontally */
-            justify-content: center;
-        }
-        
-        </style>
-        """, unsafe_allow_html=True)
-                            if selected_action:
-                                action_details_options = action_detail_mapping.get(selected_action, [])
+            # --- ACTION DETAILS COLUMN ---
+            with cols[8]:
+                st.markdown(
+                    """
+                    <div id="action-details-section" style='text-align:center; margin-bottom:2px;'>
+                        <b>Action Details</b>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+
+                # Get detail options based on Action
+                if selected_action:
+                    action_details_options = action_detail_mapping.get(
+                        selected_action, [])
+                    options = [] + action_details_options
+
+                    user_action_detail_value = row.get("User_Action_Details")
+                    default_index = (
+                        options.index(user_action_detail_value)
+                        if user_action_detail_value in options
+                        else 0
+                    )
+
+                    selected_detail = st.selectbox(
+                        label="",
+                        options=options,
+                        key=f"action_details_{idx}",
+                        index=default_index,
+                        label_visibility="collapsed"
+                    )
+
+                else:
+                    selected_detail = st.selectbox(
+                        label="",
+                        options=[""],
+                        key=f"action_details_{idx}_disabled",
+                        label_visibility="collapsed"
+                    )
+
+            # --- UNIVERSAL ALIGNMENT STYLING ---
+            st.markdown(
+                """
+                        <style>
+                            /* Consistent layout for both Action and Action Details dropdowns */
+                            #action-section div[data-testid="stSelectbox"],
+                            #action-details-section div[data-testid="stSelectbox"] {
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                justify-content: center;
+                                margin-top: -6px !important;   /* Align both dropdowns neatly under label */
+                                margin-bottom: 10px;
+                                height: auto;
+                            }
+
+                            /* Uniform dropdown width and centered text */
+                            #action-section div[data-testid="stSelectbox"] select,
+                            #action-details-section div[data-testid="stSelectbox"] select {
+                                width: 160px;
+                                text-align: center;
+                            }
+
+                            /* This targets the visible Streamlit selectbox box, version-agnostic */
+                            div[data-testid="stSelectbox"] [data-baseweb="select"] > div:nth-child(1)
+                        {
                                 
-                                # Always include an empty first option
-                                options = [] + action_details_options
+                                border-radius: 6px !important;
+                                color: #000000
+                                /*#185a9d #4682B4!important;*/
                                 
-                                # Determine the default index safely
-                                if row.get('User_Action_Details') in action_details_options:
-                                    default_index = options.index(row['User_Action_Details'])
-                                else:
-                                    default_index = 0  # default to blank
-
-                                # Ensure index is within range
-                                if default_index < 0 or default_index >= len(options):
-                                    default_index = 0
-
-                                # Render selectbox
-                                selected_detail = st.selectbox(
-                                    "",  # label hidden (custom label above)
-                                    options,
-                                    key=f"action_details_{idx}",
-                                    index=default_index
-                                )
-
-                            else:
-                                # If no Action selected, show disabled dropdown
-                                selected_detail = st.selectbox(
-                                    "",
-                                    [""],
-                                    key=f"action_details_{idx}_disabled"
-                                )
-
-                            # #  Dropdown logic
-                            # if selected_action:
-                            #     action_details_options = action_detail_mapping.get(selected_action, [])
-                            #     selected_detail = st.selectbox(
-                            #         "",   # label hidden (since we have custom label above)
-                            #         [] + action_details_options,
-                            #         key=f"action_details_{idx}",
-                            #         index=([""] + action_details_options).index(row['User_Action_Details'])
-                            #         if row['User_Action_Details'] in action_details_options else 0
-                            #     )
-                            # else:
-                            #     # If no Action selected, disable dropdown
-                            #     selected_detail = st.selectbox(
-                            #         "",
-                            #         [""],
-                            #         key=f"action_details_{idx}_disabled"
-                            #     )
-    #         # with cols[8]:
-            #     st.markdown("""
-            #         <div style= text-align:center; height: 30px;'>
-            #             <b>Action Details</b>
-            #         </div>
-            #         """, unsafe_allow_html=True)
-            #     if selected_action:
-            #         action_details_options = action_detail_mapping.get(selected_action, [])
-            #         selected_detail = st.selectbox(
-            #             "Action Detail" ,
-            #             [""] + action_details_options,
-            #             key=f"action_details_{idx}",
-            #             index=([""] + action_details_options).index(row['User_Action_Details'])
-            #             if row['User_Action_Details'] in action_details_options else 0
-            #         )
-            #     else:
-            #         # If no Action selected, disable the details dropdown
-            #         selected_detail = st.selectbox(
-            #             "Action Details",
-            #             [""],
-            #             key=f"action_details_{idx}_disabled"
-            #         )
-
-
+                            }
+                        </style>
+                        """,
+                unsafe_allow_html=True
+            )
             with cols[9]:
                 st.markdown("""
-                    <div style= text-align:center; height: 30px;'>
+                    <div style= text-align:center; height: 30px;>
                         <b>Save</b>
                     </div>
                     """, unsafe_allow_html=True)
-                #st.markdown("**Save**")
+                # st.markdown("**Save**")
                 st.markdown(
-                        """
+                    """
                         <style>
                         div.stButton > button {
                             margin-top: -15px;
                             margin-left: 8px;
-                            width: 85px;
+                            width: 100px;
                             height: 40px;
                             display: flex;
+                            
                         }
                         </style>
                         """,
-                        unsafe_allow_html=True
-                    )
+                    unsafe_allow_html=True
+                )
                 if st.button("💾", key=f"save_{idx}"):
                     df_all = pd.read_csv(data_path)
                     df_all.at[idx, 'User_Action'] = selected_action
                     df_all.at[idx, "User_Action_Details"] = selected_detail
                     df_all.to_csv(data_path, index=False)
-                    
-                    st.success(f"✅ Action saved for Claim {row['Claim_Number']}")
+
+                    st.success(
+                        f"✅ Action saved for Claim {row['Claim_Number']}")
 
             with st.container():
                 st.markdown(f"""
@@ -474,75 +568,72 @@ if selected_screen == "📊 Model Recommendations":
 
 # -------------------- 📊 Reviewed Claims Screen --------------------
 
-if selected_screen == "📊 Reviewed Claims":
+if selected_screen == "Reviewed Claims":
+
     st.title("Litigation Propensity Claims Dashboard")
     df = load_data()
-    df = df[df['Reviewed']==1]
-    # Toggle filters
+    df = df[df['Reviewed'] == 1]
     st.markdown("""
-            <style>
-            div[data-testid="stCheckbox"] {
-                display: flex;
-                height: 50px; 
-                flex-direction: row; 
-                white-space: nowrap;  
-                font-size: 20px;               
-            }
+                    <div style='text-align:left; height: 40px; margin-bottom: 8px ;margin-top:10px; font-size: 20px'>
+                        <b>Filter & Search Panel</b>
+                    </div>""", unsafe_allow_html=True)
+    # --- Create a wrapper DIV for your filter section ---
+    st.markdown('<div id="filter-section">', unsafe_allow_html=True)
+    filter_cols = st.columns(3)
+    st.markdown("""
+                    <style>
+                    /* Align selectboxes and text_input in a single line */
+                    #filter-section div[data-testid="stTextInput"] label,
+                    #filter-section div[data-testid="stSelectbox"] label {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-weight: 600;
+                        color: #333;
 
-            </style>
-            """, unsafe_allow_html=True)
-    enable_filters = st.checkbox("🔎 Enable Filters", value=True)
+                    }
 
-    claim_search = st.text_input("🔍 Search by Claim Number", key="claim_search")
+                    /* Reduce top margin/padding of Streamlit inputs */
+                    #filter-section div[data-testid="stTextInput"], 
+                    #filter-section div[data-testid="stSelectbox"] {
+                        margin-top: -50px !important;
+                    }
 
-    if enable_filters:
-        st.markdown("""
-        <div style='text-align:left; height: 80px; margin-bottom: 6px;font-size: 24px'>
-            <b>🛠️ Apply Filters</b>
-        </div>""", unsafe_allow_html=True)
-        filter_cols = st.columns(2)
+                    /* Keep input box heights consistent */
+                    #filter-section div[data-testid="stTextInput"] input,
+                    #filter-section div[data-testid="stSelectbox"] select {
+                        height: 40px !important;
+                        padding: 0px 8px !important;
+                    }
+                    </style>
+                """, unsafe_allow_html=True)
 
-        #with filter_cols[0]:
-            #state_filter = st.selectbox('STATE', [" "] + list(df['FTR_JRSDTN_ST_ABBR'].unique()), key='state_filter')
-        st.markdown("<div id='filter_section'>", unsafe_allow_html=True)
-        st.markdown("""
-                                    <style>
-}                                  
-                                    div[data-testid="stSelectbox"] {
-                                        
-                                        align-items: center;      /* Centers horizontally */
-                                        justify-content: center;
-                                
-                                        
-                                    }
+    with filter_cols[0]:
+        peril_filter = st.selectbox(
+            "INCIDENT CAUSE", [" "] + list(df['COL_CD'].unique()), key='peril_filter')
 
-                                
-                                    </style>
-                                    """, unsafe_allow_html=True)
-        with filter_cols[0]:
-            peril_filter = st.selectbox("INCIDENT CAUSE", [" "] + list(df['COL_CD'].unique()), key='peril_filter')
+    with filter_cols[1]:
+        sub_det = st.selectbox(
+            "LOB SUB-LOB", [" "] + list(df['SUB_DTL_DESC'].unique()), key='sub_det_filter')
+    with filter_cols[2]:
+        claim_search = st.text_input("SEARCH CLAIM NUMBER", key="claim_search")
 
-        with filter_cols[1]:
-            sub_det = st.selectbox("LOB SUB-LOB", [" "] + list(df['SUB_DTL_DESC'].unique()), key='sub_det_filter')
-        st.markdown("</div>", unsafe_allow_html=True)  # close filter_section wrapper
+    # Apply filters
+    filtered_df = df.copy()
+    if peril_filter != " ":
+        filtered_df = filtered_df[filtered_df['COL_CD'] == peril_filter]
+    if sub_det != " ":
+        filtered_df = filtered_df[filtered_df['SUB_DTL_DESC'] == sub_det]
 
-        # Apply filters
-        filtered_df = df.copy()
-        #if state_filter != " ":
-            #filtered_df = filtered_df[filtered_df['FTR_JRSDTN_ST_ABBR'] == state_filter]
-        if peril_filter != " ":
-            filtered_df = filtered_df[filtered_df['COL_CD'] == peril_filter]
-        if sub_det != " ":
-            filtered_df = filtered_df[filtered_df['SUB_DTL_DESC'] == sub_det]
-    else:
-        filtered_df = df.copy()
+        # filtered_df = df.copy()
 
     # Apply claim number search if entered
     if claim_search.strip():
-        filtered_df = filtered_df[filtered_df['Claim_Number'].astype(str).str.contains(claim_search.strip(), case=False)]
+        filtered_df = filtered_df[filtered_df['Claim_Number'].astype(
+            str).str.contains(claim_search.strip(), case=False)]
 
     # suspicious_df = filtered_df[filtered_df['Prediction'] == 1].copy()
-    suspicious_df = filtered_df.sort_values(by=['ML_SCORE'],ascending=False)
+    suspicious_df = filtered_df.sort_values(by=['ML_SCORE'], ascending=False)
 
     # Download filtered suspicious claims
     if not suspicious_df.empty:
@@ -556,29 +647,38 @@ if selected_screen == "📊 Reviewed Claims":
         )
 
     if suspicious_df.empty:
-        st.info("⚠️ No suspected litigated claims found with current filters or search.")
+        st.info(
+            "⚠️ No suspected litigated claims found with current filters or search.")
     else:
-        st.subheader("📋 Reviewed Claims")
+        st.subheader("Reviewed Claims")
 
         for idx, row in suspicious_df.iterrows():
             st.markdown("---")
-            cols = st.columns([2.2, 3.8, 1.8, 4.2, 3.3, 2.2, 1.8,4.0,4.0,3.0])
+            cols = st.columns(
+                [2.2, 3.8, 1.8, 4.2, 3.3, 2.2, 1.8, 4.0, 4.0, 3.0])
 
-            with cols[0]: st.markdown(f"**Claim:** {row['Claim_Number']}")
-            with cols[1]: st.markdown(f"**Incident Cause:** {row['COL_CD']}")
-            with cols[2]: st.markdown(f"**State:** {row['FTR_JRSDTN_ST_ABBR']}")
-            #with cols[3]: st.markdown(f"**Paid:** ${row['PAID_FINAL']:.2f}")
-            #with cols[3]: st.markdown(f"**Accident City:** {row['ACDNT_CITY']}")
-            with cols[3]: st.markdown(f"**Body Part Injured:** {row['BODY_PART_INJD_DESC']}")
-            with cols[4]: st.markdown(f"**Loss Party:** {row['LOSS_PARTY']}")
-            #with cols[7]: st.markdown(f"**Severity:** {row['CLM_LOSS_SEVERITY_CD']}")
-            with cols[5]: st.markdown(f"**ML Score:** {row['ML_SCORE']}")
+            with cols[0]:
+                st.markdown(f"**Claim:** {row['Claim_Number']}")
+            with cols[1]:
+                st.markdown(f"**Incident Cause:** {row['COL_CD']}")
+            with cols[2]:
+                st.markdown(f"**State:** {row['FTR_JRSDTN_ST_ABBR']}")
+            # with cols[3]: st.markdown(f"**Paid:** ${row['PAID_FINAL']:.2f}")
+            # with cols[3]: st.markdown(f"**Accident City:** {row['ACDNT_CITY']}")
+            with cols[3]:
+                st.markdown(
+                    f"**Body Part Injured:** {row['BODY_PART_INJD_DESC']}")
+            with cols[4]:
+                st.markdown(f"**Loss Party:** {row['LOSS_PARTY']}")
+            # with cols[7]: st.markdown(f"**Severity:** {row['CLM_LOSS_SEVERITY_CD']}")
+            with cols[5]:
+                st.markdown(f"**ML Score:** {row['ML_SCORE']}")
 
             # --- New Column for Notes Summary Toggle ---
             with cols[6]:
                 st.markdown("**Notes**")
                 st.markdown(
-                        """
+                    """
                         <style>
                         div[data-testid="stCheckbox"] {
                             margin-top: -46px;
@@ -589,218 +689,167 @@ if selected_screen == "📊 Reviewed Claims":
                         }
                         </style>
                         """,
-                        unsafe_allow_html=True
-                        )
+                    unsafe_allow_html=True
+                )
                 show_summary = st.toggle("", key=f"notes_toggle_{idx}")
             if show_summary:
                 with st.spinner("Generating summary using LLM..."):
-                # Pass the claim notes (or whatever column contains raw notes)
+                    # Pass the claim notes (or whatever column contains raw notes)
                     summary_text = llm(row['Claims_Notes'])
-            
+
                     st.text_area(
                         "Claim Notes Summary",
                         value=summary_text,
                         height=500,
                         key=f"notes_area_{idx}"
                     )
-            # if show_summary:
-            #     st.text_area(
-            #         "Claim Notes Summary",
-            #         value=row.get("Summary", "No summary available."),
-            #         height=500,
-            #         key=f"notes_area_{idx}"
-            #     )
 
-            # with cols[7]:
-            #     selected_action = st.selectbox(
-            #         "Action",
-            #         ["", "awaiting additional info", "dismiss", "engage an expert","increase reserve","refer to large loss","refer to SIU","settle","additional authority granted","in litigation","in negotiations","requesting mediation"],
-            #         key=f"action_{idx}",
-            #         index=["", "awaiting additional info", "dismiss", "engage an expert","increase reserve","refer to large loss","refer to SIU","settle","additional authority granted","in litigation","in negotiations","requesting mediation"].index(row['User_Action']) if row['User_Action'] in ["", "awaiting additional info", "dismiss", "engage an expert","increase reserve","refer to large loss","refer to SIU","settle","additional authority granted","in litigation","in negotiations","requesting mediation"] else 0
-            #     )
-            # with cols[8]:
-            #     # --- ACTION DETAILS dropdown (depends on Action) ---
-            #     if selected_action:
-            #         action_details_options = action_detail_mapping.get(selected_action, [])
-            #         selected_detail = st.selectbox(
-            #             f"Action Details",
-            #             [""] + action_details_options,
-            #             key=f"action_details_{idx}",
-            #             index=([""] + action_details_options).index(row['User_Action_Details'])
-            #             if row['User_Action_Details'] in action_details_options else 0
-            #         )
-            #     else:
-            #         # If no Action selected, disable the details dropdown
-            #         selected_detail = st.selectbox(
-            #             f"Action Details",
-            #             [""],
-            #             key=f"action_details_{idx}_disabled"
-            #         )
-
-            
+            # --- ACTION COLUMN ---
             with cols[7]:
+                # Label above dropdown
+                st.markdown(
+                    """
+                    <div id="action-section" style='text-align:center; margin-bottom:2px;'>
+                        <b>Action</b>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
 
-                st.markdown("""
-        <div style='text-align:center; height: 30px; margin-bottom: 4px;'>
-            <b>Action</b>
-        </div>
-        """, unsafe_allow_html=True)
-                st.markdown("<div id='row_section1'>"
-                                , unsafe_allow_html=True)
-                st.markdown("""
-        <style>
-                    
-                    div[data-testid="stSelectbox"] {
-                        display: flex;
-                        flex-direction: column;
-                        margin-top: -70px;
-                        align-items: center;      /* Centers horizontally */
-                        justify-content: center;
-                        
-        }
-    
-        </style>
-        """, unsafe_allow_html=True)
                 action_options = [
-    "",
-    "Awaiting Additional Info",
-    "Dismiss",
-    "Engage an Expert",
-    "Increase Reserve",
-    "Refer to Large Loss",
-    "Refer to SIU",
-    "Settle",
-    "Additional Authority Granted",
-    "In Litigation",
-    "In Negotiations",
-    "Requesting Mediation"
-]
-            
-                # Get current user action safely
-                user_action_value = row.get("User_Action")
-                # Show the prefilled suggestion (grey hint text)
-                # Determine default index safely
-                if user_action_value in action_options:
-                    default_index = action_options.index(user_action_value)
-                else:
-                    default_index = 0  # fallback to blank if invalid or missing
-            
-                # Render dropdown
-                selected_action = st.selectbox(
                     "",
-                    action_options,
+                    "Awaiting Additional Info",
+                    "Dismiss",
+                    "Engage an Expert",
+                    "Increase Reserve",
+                    "Refer to Large Loss",
+                    "Refer to SIU",
+                    "Settle",
+                    "Additional Authority Granted",
+                    "In Litigation",
+                    "In Negotiations",
+                    "Requesting Mediation"
+                ]
+
+                # Determine default index safely
+                user_action_value = row.get("User_Action")
+                default_index = action_options.index(
+                    user_action_value) if user_action_value in action_options else 0
+
+                # Render Action dropdown
+                selected_action = st.selectbox(
+                    label="",
+                    options=action_options,
                     key=f"action_{idx}",
-                    index=default_index
+                    index=default_index,
+                    label_visibility="collapsed"
+                )
+
+            # --- ACTION DETAILS COLUMN ---
+            with cols[8]:
+                st.markdown(
+                    """
+                    <div id="action-details-section" style='text-align:center; margin-bottom:2px;'>
+                        <b>Action Details</b>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+
+                # Get detail options based on Action
+                if selected_action:
+                    action_details_options = action_detail_mapping.get(
+                        selected_action, [])
+                    options = [] + action_details_options
+
+                    user_action_detail_value = row.get("User_Action_Details")
+                    default_index = (
+                        options.index(user_action_detail_value)
+                        if user_action_detail_value in options
+                        else 0
                     )
-                st.markdown("</div>", unsafe_allow_html=True)  # close filter_section wrapper
-            # selected_action = st.selectbox(
-                #     "",
-                #     ["", "Awaiting Additional Info", "Dismiss", "Engage an Expert","Increase Reserve","Refer to Large Loss","Refer to SIU","Settle","Additional Authority Granted","In Litigation","In Negotiations","Requesting Mediation"],
-                #     key=f"action_{idx}",
-                #     index=["", "Awaiting Additional Info", "Dismiss", "Engage an Expert","Increase Reserve","Refer to Large Loss","Refer to SIU","Settle","Additional Authority Granted","In Litigation","In Negotiations","Requesting Mediation"].index(row['User_Action']) if row['User_Action'] in ["", "Awaiting Additional Info", "Dismiss", "Engage an Expert","Increase Reserve","Refer to Large Loss","Refer to SIU","Settle","Additional Authority Granted","In Litigation","In Negotiations","Requesting Mediation"] else 0
-                # )
-               
-                                
 
-                                    
-                # --- ACTION DETAILS dropdown (depends on Action) ---
-                with cols[8]:
-    #  Center the label properly
-                            st.markdown("""
-        <div style='text-align:center; height: 30px; margin-bottom: 4px;'>
-            <b>Action Details</b>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    # Add CSS once (to center dropdown itself)
-                            st.markdown("<div id='row_section'>", unsafe_allow_html=True)
-                            st.markdown("""
-                            <style>
+                    selected_detail = st.selectbox(
+                        label="",
+                        options=options,
+                        key=f"action_details_{idx}",
+                        index=default_index,
+                        label_visibility="collapsed"
+                    )
 
-                                    div[data-testid="stSelectbox"] {
-                                        margin-top: -70px;
-                                        flex-direction: column;
-                                        
-                                        align-items: center;      /* Centers horizontally */
-                                        justify-content: center;
-                                         
-                                    }
-                                
-                                    </style>
-                                    """, unsafe_allow_html=True)
-                           
+                else:
+                    selected_detail = st.selectbox(
+                        label="",
+                        options=[""],
+                        key=f"action_details_{idx}_disabled",
+                        label_visibility="collapsed"
+                    )
 
-                            if selected_action:
-                                action_details_options = action_detail_mapping.get(selected_action, [])
-                                
-                                # Always include an empty first option
-                                options = [] + action_details_options
-                                
-                                # Determine the default index safely
-                                if row.get('User_Action_Details') in action_details_options:
-                                    default_index = options.index(row['User_Action_Details'])
-                                else:
-                                    default_index = 0  # default to blank
+            # --- UNIVERSAL ALIGNMENT STYLING ---
+            st.markdown(
+                """
+    <style>
+        /* Consistent layout for both Action and Action Details dropdowns */
+        #action-section div[data-testid="stSelectbox"],
+        #action-details-section div[data-testid="stSelectbox"] {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: -6px !important;   /* Align both dropdowns neatly under label */
+            margin-bottom: 10px;
+            height: auto;
+        }
 
-                                # Ensure index is within range
-                                if default_index < 0 or default_index >= len(options):
-                                    default_index = 0
+        /* Uniform dropdown width and centered text */
+        #action-section div[data-testid="stSelectbox"] select,
+        #action-details-section div[data-testid="stSelectbox"] select {
+            width: 160px;
+            text-align: center;
+        }
 
-                                # Render selectbox
-                                selected_detail = st.selectbox(
-                                    "",  # label hidden (custom label above)
-                                    options,
-                                    key=f"action_details_{idx}",
-                                    index=default_index
-                                )
-
-                            else:
-                                # If no Action selected, show disabled dropdown
-                                selected_detail = st.selectbox(
-                                    "",
-                                    [""],
-                                    key=f"action_details_{idx}_disabled"
-                                )
-                                st.markdown("</div>", unsafe_allow_html=True)  # close filter_section wrapper
-
-
-
-
-            # with cols[9]:
-            #     if st.button("💾 Save", key=f"save_{idx}"):
-            #         df_all = pd.read_csv(data_path)
-            #         df_all.at[idx, 'User_Action'] = selected_action
-            #         df_all.at[idx, "User_Action_Details"] = selected_detail
-            #         df_all.to_csv(data_path, index=False)
-            #         st.success(f"✅ Action saved for Claim {row['Claim_Number']}")
+        /* This targets the visible Streamlit selectbox box, version-agnostic */
+        div[data-testid="stSelectbox"] [data-baseweb="select"] > div:nth-child(1)
+    {
+            
+            border-radius: 6px !important;
+            color: #000000
+            /* #808080 -black #4682B4!important;*/
+            
+        }
+    </style>
+    """,
+                unsafe_allow_html=True
+            )
             with cols[9]:
                 st.markdown("""
                     <div style= text-align:center; height: 30px;'>
                         <b>Save</b>
                     </div>
                     """, unsafe_allow_html=True)
-                #st.markdown("**Save**")
+                # st.markdown("**Save**")
                 st.markdown(
-                        """
+                    """
                         <style>
                         div.stButton > button {
                             margin-top: -15px;
                             margin-left: 8px;
-                            width: 85px;
+                            width: 100px;
                             height: 40px;
                             display: flex;
                         }
                         </style>
                         """,
-                        unsafe_allow_html=True
-                    )
+                    unsafe_allow_html=True
+                )
                 if st.button("💾", key=f"save_{idx}"):
                     df_all = pd.read_csv(data_path)
                     df_all.at[idx, 'User_Action'] = selected_action
                     df_all.at[idx, "User_Action_Details"] = selected_detail
                     df_all.to_csv(data_path, index=False)
-                    
-                    st.success(f"✅ Action saved for Claim {row['Claim_Number']}")
+
+                    st.success(
+                        f"✅ Action saved for Claim {row['Claim_Number']}")
 
             with st.container():
                 st.markdown(f"""
@@ -816,7 +865,6 @@ if selected_screen == "📊 Reviewed Claims":
                 <i>Reviewed 2 days ago</i>
                 </div>
                 """, unsafe_allow_html=True)
-
 
 
 # # # -------------------- 📈 KPI Screen --------------------
@@ -870,11 +918,11 @@ if selected_screen == "📊 Reviewed Claims":
 
 
 # -------------------- 📊 Monitoring Dashboard --------------------
-elif selected_screen == "📊 Monitoring Dashboard":
-    st.title("📊 Monitoring Dashboard - Power BI")
+elif selected_screen == "Monitoring Dashboard":
+    st.title("Monitoring Dashboard - Power BI")
 
     st.markdown("#### Embedded Power BI Dashboard Below:")
-    
+
     powerbi_embed_url = """
     <iframe title="SUBROGATION PROPENSITY MODEL MONITORING" width="1140" height="600" 
         src="https://app.powerbi.com/reportEmbed?reportId=49d274d9-37a4-4f06-ac05-dc7a98960ed9&autoAuth=true&ctid=dafe49bc-5ac3-4310-97b4-3e44a28cbf18&actionBarEnabled=true" 
@@ -968,7 +1016,7 @@ elif selected_screen == "📊 Monitoring Dashboard":
 
 # # -------------------- 📑 Actioned Claims Screen --------------------
 # elif selected_screen == "📑 Subrogation Workbench":
-    
+
 #     # Upload & process files
 #     UPLOAD_BASE_DIR = "uploaded_claims"
 #     PROCESSED_BASE_DIR = "processed_claims"
@@ -981,7 +1029,6 @@ elif selected_screen == "📊 Monitoring Dashboard":
 #             base64_pdf = base64.b64encode(f.read()).decode("utf-8")
 #         pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="600" type="application/pdf"></iframe>'
 #         st.markdown(pdf_display, unsafe_allow_html=True)
-
 
 
 #     # -------------------- DEMAND LETTER EDITOR SCREEN --------------------
@@ -1014,7 +1061,7 @@ elif selected_screen == "📊 Monitoring Dashboard":
 #         Dear {other_party_adjuster_name},
 
 #         We represent {Insured_Name}, the automobile insurance carrier for {Insured_Name}. On {Date_of_Loss},
-#         your insured, {Other_Party_insured_name} negligently caused a motor vehicle collision 
+#         your insured, {Other_Party_insured_name} negligently caused a motor vehicle collision
 #         at {claim_details['STATE_GROUP']}. Based on the police report and supporting evidence, your insured
 #         was cited for failure to stop at a red light, thereby establishing liability.
 
@@ -1097,9 +1144,6 @@ elif selected_screen == "📊 Monitoring Dashboard":
 
 #                 st.success(f"📄 Demand Package generated for Claim {claim_number}")
 #                 st.rerun()
-
-
-
 
 
 #     # -------------------- DEMAND PACKAGE PREVIEW SCREEN --------------------
@@ -1196,7 +1240,6 @@ elif selected_screen == "📊 Monitoring Dashboard":
 #                             st.success(f"✅ Action saved for Claim {row['Claim_Number']}")
 
 
-
 #                     with col4:
 #                         uploaded_files = st.file_uploader(
 #                             f"📎 Upload Files (Claim {row['Claim_Number']})",
@@ -1225,7 +1268,7 @@ elif selected_screen == "📊 Monitoring Dashboard":
 #                                     st.session_state["uploaded_docs"][row['Claim_Number']].append(file_path)
 
 #                                 step += 1
-#                                 progress.progress(int((step / total_steps) * 100), 
+#                                 progress.progress(int((step / total_steps) * 100),
 #                                                 text=f"📂 Uploaded {uploaded_file.name}")
 
 #                                 time.sleep(0.2)  # just to show smooth progress (optional)
