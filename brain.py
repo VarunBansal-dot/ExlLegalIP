@@ -14,7 +14,7 @@ import time
 
 # -------------------- Login Credential System --------------------
 USER_CREDENTIALS = {
-    "admin": "admin123",
+    "Admin": "admin123",
     "exluser": "exl2025"
 }
 
@@ -190,7 +190,9 @@ with st.container():
 # -------------------- Sidebar --------------------
     with st.sidebar:
         st.image("exl logo.png", use_container_width=True)
-        selected_screen = st.radio("Navigation", [
+        st.markdown("<div style='font-weight:700; font-size:22px;margin-left: 25px; margin-bottom:0px;'>Navigation Panel</div>", unsafe_allow_html=True)
+        
+        selected_screen = st.radio("", [
             "Model Recommendations",
             "Reviewed Claims",
             # "📑 Subrogation Workbench",
@@ -271,7 +273,7 @@ if selected_screen == "Model Recommendations":
     df = load_data()
     df = df[df['Reviewed'] == 0]
     st.markdown("""
-                    <div style='text-align:left; height: 40px; margin-bottom: 8px ;margin-top:10px; font-size: 20px'>
+                    <div style='text-align:left; height: 30px; font-size: 25px; margin-top: 10px'>
                         <b>Filter & Search Panel</b>
                     </div>""", unsafe_allow_html=True)
     # --- Create a wrapper DIV for your filter section ---
@@ -349,7 +351,7 @@ if selected_screen == "Model Recommendations":
         st.info(
             "⚠️ No suspected litigated claims found with current filters or search.")
     else:
-        st.subheader("Claims Pending Review & Action")
+        st.subheader("Review and Act on Model Recommended Claims")
 
         for idx, row in suspicious_df.iterrows():
             st.markdown("---")
@@ -574,7 +576,7 @@ if selected_screen == "Reviewed Claims":
     df = load_data()
     df = df[df['Reviewed'] == 1]
     st.markdown("""
-                    <div style='text-align:left; height: 40px; margin-bottom: 8px ;margin-top:10px; font-size: 20px'>
+                    <div style='text-align:left; height: 30px; font-size: 25px; margin-top: 10px'>
                         <b>Filter & Search Panel</b>
                     </div>""", unsafe_allow_html=True)
     # --- Create a wrapper DIV for your filter section ---
