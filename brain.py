@@ -1648,8 +1648,7 @@ elif selected_screen == "Monitoring Dashboard":
     # st.markdown("#### Embedded Power BI Dashboard Below:")
 
     powerbi_embed_url = """
-<iframe title="Litigation Propensity Model Monitoring Dashboard" width="1140" height="541.25" src=https://app.powerbi.com/reportEmbed?reportId=1cd0509f-2f9e-4d7a-8bdd-0094e3c65623&autoAuth=true&ctid=dafe49bc-5ac3-4310-97b4-3e44a28cbf18%22 frameborder="0" allowFullScreen="true"></iframe>
-  
+<iframe title="Litigation Propensity Model Monitoring Dashboard" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=05566686-41f7-46ff-a15d-df70a00f4f3f&autoAuth=true&ctid=dafe49bc-5ac3-4310-97b4-3e44a28cbf18" frameborder="0" allowFullScreen="true"></iframe>  
     """
     componentspip.html(powerbi_embed_url, height=650)
 
