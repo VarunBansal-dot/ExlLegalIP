@@ -1645,16 +1645,14 @@ elif selected_screen == "Legal Propensity Reviewed Claims":
 
 # -------------------- 📊 Monitoring Dashboard --------------------
 elif selected_screen == "Monitoring Dashboard":
-    st.title("Monitoring Dashboard - Power BI")
+    # st.title("Monitoring Dashboard - Power BI")
 
-    st.markdown("#### Embedded Power BI Dashboard Below:")
+    # st.markdown("#### Embedded Power BI Dashboard Below:")
 
     powerbi_embed_url = """
- <iframe title="Litigation Propensity Model Monitoring Dashboard" width="1140" height="541.25" src=https://app.powerbi.com/reportEmbed?reportId=1cd0509f-2f9e-4d7a-8bdd-0094e3c65623&autoAuth=true&ctid=dafe49bc-5ac3-4310-97b4-3e44a28cbf18
- frameborder="0" allowFullScreen="true"></iframe>
-
+<iframe title="Litigation Propensity Model Monitoring Dashboard" width="1200" height="800" src="https://app.powerbi.com/reportEmbed?reportId=05566686-41f7-46ff-a15d-df70a00f4f3f&autoAuth=true&ctid=dafe49bc-5ac3-4310-97b4-3e44a28cbf18" frameborder="0" allowFullScreen="true"></iframe>  
     """
-    componentspip.html(powerbi_embed_url, height=650)
+    componentspip.html(powerbi_embed_url, height=800)
 
 
 elif selected_screen == "Law Firm Assignment":
@@ -2318,16 +2316,16 @@ elif selected_screen == "Law Firm Assignment":
 
 # -------------------- 📊 Monitoring Dashboard --------------------
 elif selected_screen == "Legal Spend Dashboard":
-    st.title("Legal Spend Dashboard - Power BI")
+    # st.title("Legal Spend Dashboard - Power BI")
 
-    st.markdown("#### Embedded Power BI Dashboard Below:")
+    # st.markdown("#### Embedded Power BI Dashboard Below:")
 
     powerbi_embed_url = """
- <iframe title="Legal Expense Dashboard" width="1140" height="541.25" src=https://app.powerbi.com/reportEmbed?reportId=dbc06794-896c-494e-a901-caa07670f375&autoAuth=true&ctid=dafe49bc-5ac3-4310-97b4-3e44a28cbf18
+ <iframe title="Legal Expense Dashboard" width="1200" height="800" src=https://app.powerbi.com/reportEmbed?reportId=dbc06794-896c-494e-a901-caa07670f375&autoAuth=true&ctid=dafe49bc-5ac3-4310-97b4-3e44a28cbf18
  frameborder="0" allowFullScreen="true"></iframe>
 
     """
-    componentspip.html(powerbi_embed_url, height=650)
+    componentspip.html(powerbi_embed_url, height=800)
 
 
 # # -------------------- 🧠 Q&A Assistant --------------------
