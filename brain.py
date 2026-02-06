@@ -1767,7 +1767,6 @@ elif selected_screen == "Law Firm Assignment":
         firm_row = Lit_data_firm_df[
             Lit_data_firm_df["Firm Name"] == selected_firm
         ]
-
         if firm_row.empty:
             st.error(f"Firm '{selected_firm}' not found in dataset.")
         else:
@@ -1778,7 +1777,7 @@ elif selected_screen == "Law Firm Assignment":
             ]
 
             Avg_Cycle_Time = int(cluster_df["Cycle time"].mean())
-            Win_Rate = round(cluster_df["Win rate proxy"].mean() * 100, 1)
+            Win_Rate = round(cluster_df["Win rate proxy"].mean() * 100, 3)
             Avg_Cost = int(cluster_df["Cost per case"].mean()) *10
 
             Avg_claim_closed_cnt = int(
@@ -1827,7 +1826,7 @@ elif selected_screen == "Law Firm Assignment":
                 <b>Avg Claim Closed Count:</b> {Avg_claim_closed_cnt}<br>
                 <b>Avg Paid Post Appeal:</b> ${Avg_paid_post_appeal}K<br>
                 <hr>
-                <b>Typical Claim Profile</b>
+                <b>Typical Cluster Profile</b>
                 <ul>
                     <li>{cluster_profile[0]}</li>
                     <li>{cluster_profile[1]}</li>
