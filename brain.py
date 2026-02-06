@@ -2100,7 +2100,7 @@ elif selected_screen == "Law Firm Assignment":
     # -------------------------
     # Similar Claims Section
     # -------------------------
-    st.subheader("🧠 Top 5 Similar Claims")
+    st.subheader("Top 5 Similar Claims")
 
     # Use already selected claim safely
     selected_claim = claim
