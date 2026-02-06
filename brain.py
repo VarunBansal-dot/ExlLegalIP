@@ -1526,7 +1526,7 @@ elif selected_screen == "Law Firm Assignment":
     @st.cache_data
     def load_data():
         claims = pd.read_csv("model_output_with_predicted_cluster.csv")
-        firms = pd.read_csv("synthetic_litigation_dataset_with_firms_and_cluster.csv")
+        firms = pd.read_csv("synthetic_law_firm_level_pnc_auto_corrected.csv")
         return claims, firms
 
     claims_df, firms_df = load_data()
@@ -1759,7 +1759,7 @@ elif selected_screen == "Law Firm Assignment":
 
 
         Lit_data_firm_df = pd.read_csv(
-            "synthetic_litigation_dataset_with_firms_and_cluster.csv"
+            "synthetic_law_firm_level_pnc_auto_corrected.csv"
         )
 
         selected_firm = claim["Firm Name"]
@@ -1777,38 +1777,43 @@ elif selected_screen == "Law Firm Assignment":
             ]
 
             Avg_Cycle_Time = int(cluster_df["Cycle time"].mean())
-            Win_Rate = round(cluster_df["Win rate proxy"].mean() * 100, 3)
-            Avg_Cost = int(cluster_df["Cost per case"].mean()) *10
+            Win_Rate = round(cluster_df["Win rate proxy"].mean() * 100, 2)
+            Avg_Cost = int(cluster_df["Cost per case"].mean()) 
 
 
-            Avg_claim_closed_cnt = int(cluster_df["Case closed count"].mean() * 10)
+            Avg_claim_closed_cnt = int(cluster_df["Case closed count"].mean())
             
 
-            Avg_paid_post_appeal = int(cluster_df["Paid post appeal"].mean() * 5)
+            Avg_paid_post_appeal = int(cluster_df["Paid post appeal"].mean())
             
 
             cluster_profile_map = {
-                "High-Value Core Firms": [
-                    "Strong win rates with balanced cost and cycle time",
-                    "Premium fee structure",
-                    "Reliable for high-value cases"
-                ],
-                "High-Cost / Underperformers": [
-                    "High cost per case",
-                    "Weaker win rates and slower cycle times",
-                    "Requires tighter performance governance"
-                ],
-                "Outcome Specialists": [
-                    "Highest win rates",
-                    "Moderate case volumes",
-                    "Best suited for complex, outcome-critical matters"
-                ],
+
                 "Efficient Volume Handlers": [
-                    "Low cost per case",
-                    "Fast cycle times",
-                    "Ideal for high-volume, routine work"
+                    "Highest throughput and recovery generation",
+                    "Fastest case resolution timelines",
+                    "Stable performance at moderate cost"
+                ],
+
+                "High-Cost / Underperformers": [
+                    "Highest operating cost firms",
+                    "Slowest resolution and lowest win rates",
+                    "Requires active performance governance"
+                ],
+
+                "High-Value Core Firms": [
+                    "Highest litigation success rates",
+                    "Lowest cost per case delivery",
+                    "Strong core panel quality firms"
+                ],
+
+                "Outcome Specialists": [
+                    "Lean expense structure",
+                    "Strong outcomes with faster resolution",
+                    "Balanced cost and performance efficiency"
                 ]
             }
+
 
             cluster_profile = cluster_profile_map.get(
                 Cluster_id, ["No profile available."] * 3
@@ -1819,21 +1824,18 @@ elif selected_screen == "Law Firm Assignment":
                 <h4>Assigned Firm Cluster</h4>
                 <h5>{Cluster_id}</h5>
                 <hr>
-                <b>Avg Cycle Time:</b> {Avg_Cycle_Time *100} days<br>
+                <b>Avg Cycle Time:</b> {Avg_Cycle_Time} days<br>
                 <b>Win Rate:</b> {Win_Rate}%<br>
-                <b>Avg Cost:</b> ${Avg_Cost:,}K<br>
+                <b>Avg Cost per case:</b> ${Avg_Cost:,}<br>
                 <b>Avg Claim Closed Count:</b> {Avg_claim_closed_cnt}<br>
-                <b>Avg Paid Post Appeal:</b> ${Avg_paid_post_appeal}K<br>
+                <b>Avg Paid Post Appeal:</b> ${Avg_paid_post_appeal}<br>
                 <hr>
                 <b>Typical Cluster Profile</b>
                 <ul>
                     <li>{cluster_profile[0]}</li>
                     <li>{cluster_profile[1]}</li>
                     <li>{cluster_profile[2]}</li>
-                </ul> 
-                <span class="small-text">
-                Best suited for long-duration, high-exposure litigation. 
-                </span>
+                </ul>
             </div>
             """, unsafe_allow_html=True)
 
@@ -1875,8 +1877,8 @@ elif selected_screen == "Law Firm Assignment":
                 step=0.1
             )
         with col3:
-            Cost_per_case_weight = st.slider(
-                "Cost Per Case Weight",
+            Closed_case_cnt_weight = st.slider(
+                "Closed Case Count Weight",
                 min_value=0.0,
                 max_value=1.0,
                 value=0.3,
@@ -1902,9 +1904,9 @@ elif selected_screen == "Law Firm Assignment":
 
         # ---- Compute weighted score ----
         Lit_data_firm_filter_df['Weighted_Score'] = (
-            cycle_time_weight * (10 - Lit_data_firm_filter_df['Cycle time']) +
+            cycle_time_weight * (Lit_data_firm_filter_df['Cycle time']) +
             win_rate_weight * Lit_data_firm_filter_df['Win rate proxy'] +
-            Cost_per_case_weight * (10 - Lit_data_firm_filter_df['Cost per case'])
+            Closed_case_cnt_weight * (Lit_data_firm_filter_df['Case closed count'])
         )
 
         top_firms = Lit_data_firm_filter_df.sort_values(
@@ -1924,8 +1926,8 @@ elif selected_screen == "Law Firm Assignment":
                     row["Firm Name"],
                     row["state_list"],
                     f"{round(row['Win rate proxy'] * 100, 1)}%",
-                    f"${int(row['Cost per case']*10)}K",
-                    f"{int(row['Cycle time']) *100} Days",
+                    f"${int(row['Cost per case'])}",
+                    f"{int(row['Cycle time'])} Days",
                     row['Firm_Profile']
                 )
             )
@@ -1944,7 +1946,7 @@ elif selected_screen == "Law Firm Assignment":
                         <span class="large-text">{state}</span>
                         <hr>
                         <b>Win Rate:</b> {firm[2]}<br>
-                        <b>Avg Cost:</b> {firm[3]}<br>
+                        <b>Avg Cost per case:</b> {firm[3]}<br>
                         <b>Cycle Time:</b> {firm[4]}<br>
                         <b>Firm Profile:</b> {firm[5]}<br>
                     </div>
