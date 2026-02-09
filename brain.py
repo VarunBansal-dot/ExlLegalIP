@@ -2075,9 +2075,7 @@ elif selected_screen == "Law Firm Assignment":
                             <b>Win Rate:</b> {firm[2]}<br>
                             <b>Avg Cost:</b> {firm[3]}<br>
                             <b>Cycle Time:</b> {firm[4]}<br>
-                            <b>Firm Profile:</b> {firm[5]}<br>
-
-                            
+                            <b>Firm Profile:</b> {firm[5]}<br>       
                         </div>
                         """,
                         unsafe_allow_html=True
