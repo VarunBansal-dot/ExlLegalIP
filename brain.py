@@ -1904,9 +1904,9 @@ elif selected_screen == "Law Firm Assignment":
 
         # ---- Compute weighted score ----
         Lit_data_firm_filter_df['Weighted_Score'] = (
-            cycle_time_weight * (np.log(Lit_data_firm_filter_df['Cycle time']+1).mean()) +
-            win_rate_weight * (np.log(Lit_data_firm_filter_df['Win rate proxy']+1).mean()) +
-            Closed_case_cnt_weight * (np.log(Lit_data_firm_filter_df['Case closed count']+1).mean())
+            cycle_time_weight * (np.log(Lit_data_firm_filter_df['Cycle time']+1)) +
+            win_rate_weight * (np.log(Lit_data_firm_filter_df['Win rate proxy']+1)) +
+            Closed_case_cnt_weight * (np.log(Lit_data_firm_filter_df['Case closed count']+1))
         )
 
         top_firms = Lit_data_firm_filter_df.sort_values(
@@ -2018,8 +2018,8 @@ elif selected_screen == "Law Firm Assignment":
 
         # ---- Compute weighted score ----
         Lit_data_firm_filter_df['Weighted_Score'] = (
-            cost_per_case * (np.log(Lit_data_firm_filter_df['Cost per case']+1).mean()) +
-            paid_post_appeal * (np.log(Lit_data_firm_filter_df['Paid post appeal']+1).mean())
+            cost_per_case * (np.log(Lit_data_firm_filter_df['Cost per case']+1)) +
+            paid_post_appeal * (np.log(Lit_data_firm_filter_df['Paid post appeal']+1))
             )
 
         top_firms = Lit_data_firm_filter_df.sort_values(
