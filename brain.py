@@ -1826,7 +1826,7 @@ elif selected_screen == "Law Firm Assignment":
                 <hr>
                 <b>Avg Cycle Time:</b> {Avg_Cycle_Time} days<br>
                 <b>Win Rate:</b> {Win_Rate}%<br>
-                <b>Avg Cost per case:</b> ${Avg_Cost:,}<br>
+                <b>Avg Cost per case:</b> {Avg_Cost:,}<br>
                 <b>Avg Claim Closed Count:</b> {Avg_claim_closed_cnt}<br>
                 <b>Avg Paid Post Appeal:</b> ${Avg_paid_post_appeal}<br>
                 <hr>
@@ -1934,7 +1934,7 @@ elif selected_screen == "Law Firm Assignment":
                     row["Firm Name"],
                     row["state_list"],
                     f"{round(row['Win rate proxy'] * 100, 1)}%",
-                    f"${int(row['Cost per case'])}",
+                    f"{int(row['Cost per case'])}",
                     f"{int(row['Cycle time'])} Days",
                     row['Firm_Profile']
                 )
@@ -2053,8 +2053,8 @@ elif selected_screen == "Law Firm Assignment":
                     row["Firm Name"],
                     row["state_list"],
                     f"{round(row['Win rate proxy'] * 100, 1)}%",
-                    f"${int(row['Cost per case']*10)}K",
-                    f"{int(row['Cycle time']) *100} Days",
+                    f"{int(row['Cost per case'])}",
+                    f"{int(row['Cycle time'])} Days",
                     row['Firm_Profile']
                 )
             )
