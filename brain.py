@@ -1989,7 +1989,7 @@ elif selected_screen == "Law Firm Assignment":
 
     else:
         st.subheader("Recommended Firms (Within Cluster)")
-        col1, col2 = st.columns(2)
+        col1, col2, col3, col4 = st.columns(4)
         with col1:
             cost_per_case = st.slider(
                 "Cost Per Case Weight",
@@ -2006,6 +2006,22 @@ elif selected_screen == "Law Firm Assignment":
                 value=0.3,
                 step=0.1
             )
+        with col3:
+            billed_expense_weight  = st.slider(
+                "Billed Expense Weight",
+                min_value=0.0,
+                max_value=1.0,
+                value=0.3,
+                step=0.1
+        )
+        with col4:
+            paid_expense_weight = st.slider(
+                "Paid Expense Weight",
+                min_value=0.0,
+                max_value=1.0,
+                value=0.3,
+                step=0.1
+    )
 
 
 
