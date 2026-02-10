@@ -1907,7 +1907,7 @@ elif selected_screen == "Law Firm Assignment":
         wr = Lit_data_firm_filter_df['Win rate proxy']
         cc = Lit_data_firm_filter_df['Case closed count']
 
-        Lit_data_firm_filter_df['Weighted_Score'] = (cycle_time_weight *((ct - ct.min()) / (ct.max() - ct.min() + 1e-9)) + 
+        Lit_data_firm_filter_df['Weighted_Score'] = (cycle_time_weight * ((ct - ct.min()) / (ct.max() - ct.min() + 1e-9)) + 
                                                      win_rate_weight * ((wr - wr.min()) / (wr.max() - wr.min() + 1e-9)) +
                                                      Closed_case_cnt_weight * ((cc - cc.min()) / (cc.max() - cc.min() + 1e-9)))
 
