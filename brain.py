@@ -45,7 +45,7 @@ def login():
     with col2:
 
         # EXL Logo
-        st.image("exl_logo.png", use_container_width=True)
+        st.image("exl_logo.png", width=300)
 
         st.markdown("## Claims Litigation360")
         # st.caption("AI-Driven Law Firm Optimization Platform")
