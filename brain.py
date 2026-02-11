@@ -17,16 +17,36 @@ import ast
 
 #---------------------NEW LANDING PAGE-----------------------------
 # -------------------- AI Themed Styling --------------------
+# --------------------- NEW LANDING PAGE -----------------------------
+import streamlit as st
+
+st.set_page_config(layout="wide")
+
+# -------------------- AI Themed Styling --------------------
 st.markdown("""
 <style>
+
+/* Full dark background */
 .main {
     background: linear-gradient(135deg, #0f172a, #1e293b);
 }
 
+/* Remove default max width restriction */
 .block-container {
-    padding-top: 2rem;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+    max-width: 100% !important;
 }
 
+/* Full screen vertical centering */
+.fullscreen-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* Login Card */
 .login-card {
     background: rgba(255, 255, 255, 0.05);
     padding: 40px;
@@ -36,6 +56,7 @@ st.markdown("""
     box-shadow: 0 8px 32px rgba(0,0,0,0.3);
 }
 
+/* Title */
 .ai-title {
     font-size: 26px;
     font-weight: 600;
@@ -43,11 +64,13 @@ st.markdown("""
     margin-bottom: 5px;
 }
 
+/* Subtitle */
 .ai-subtitle {
     font-size: 14px;
     color: #94a3b8;
     margin-bottom: 25px;
 }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -65,12 +88,15 @@ if "logged_in" not in st.session_state:
 
 def login():
 
-    col1, col2 = st.columns([1, 1])
+    # Fullscreen wrapper
+    st.markdown('<div class="fullscreen-container">', unsafe_allow_html=True)
+
+    col1, col2 = st.columns([1.1, 1], gap="large")
 
     # ---------------- LEFT SIDE (AI Litigation Visual) ----------------
     with col1:
         st.image(
-            "litigation_ai.jpg",  # <-- replace with your image
+            "litigation_ai.jpg",
             use_container_width=True
         )
 
@@ -78,8 +104,14 @@ def login():
     with col2:
         st.markdown('<div class="login-card">', unsafe_allow_html=True)
 
-        st.markdown('<div class="ai-title">Auto BI Litigation Intelligence</div>', unsafe_allow_html=True)
-        st.markdown('<div class="ai-subtitle">AI-Driven Law Firm Optimization Platform</div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="ai-title">Auto BI Litigation Intelligence</div>',
+            unsafe_allow_html=True
+        )
+        st.markdown(
+            '<div class="ai-subtitle">AI-Driven Law Firm Optimization Platform</div>',
+            unsafe_allow_html=True
+        )
 
         username = st.text_input("Username")
         password = st.text_input("Password", type="password")
@@ -97,10 +129,13 @@ def login():
 
         st.markdown('</div>', unsafe_allow_html=True)
 
+    st.markdown('</div>', unsafe_allow_html=True)
+
 
 if not st.session_state.logged_in:
     login()
     st.stop()
+
 
 # -------------------- Login Credential System --------------------
 # USER_CREDENTIALS = {
