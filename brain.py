@@ -70,7 +70,7 @@ def login():
     # ---------------- LEFT SIDE (AI Litigation Visual) ----------------
     with col1:
         st.image(
-            "ai_auto_litigation.jpg",  # <-- replace with your image
+            "litigation_ai.jpg",  # <-- replace with your image
             use_container_width=True
         )
 
