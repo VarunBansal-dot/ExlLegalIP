@@ -15,6 +15,41 @@ from matplotlib.patches import Polygon
 import numpy as np
 import ast
 
+#---------------------NEW LANDING PAGE-----------------------------
+# -------------------- AI Themed Styling --------------------
+st.markdown("""
+<style>
+.main {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+}
+
+.block-container {
+    padding-top: 2rem;
+}
+
+.login-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 40px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.ai-title {
+    font-size: 26px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.ai-subtitle {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 25px;
+}
+</style>
+""", unsafe_allow_html=True)
 
 
 # -------------------- Login Credential System --------------------
@@ -29,25 +64,75 @@ if "logged_in" not in st.session_state:
 
 
 def login():
-    st.image("exl logo.png", use_container_width=True)
 
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
-    login_btn = st.button("Login")
+    col1, col2 = st.columns([1, 1])
 
-    if login_btn:
-        if username in USER_CREDENTIALS and USER_CREDENTIALS[username] == password:
-            st.session_state.logged_in = True
-            st.session_state.username = username
-            st.success(f"✅ Welcome, {username}!")
-            st.rerun()
-        else:
-            st.error("❌ Invalid username or password")
+    # ---------------- LEFT SIDE (AI Litigation Visual) ----------------
+    with col1:
+        st.image(
+            "ai_auto_litigation.jpg",  # <-- replace with your image
+            use_container_width=True
+        )
+
+    # ---------------- RIGHT SIDE (Login Card) ----------------
+    with col2:
+        st.markdown('<div class="login-card">', unsafe_allow_html=True)
+
+        st.markdown('<div class="ai-title">Auto BI Litigation Intelligence</div>', unsafe_allow_html=True)
+        st.markdown('<div class="ai-subtitle">AI-Driven Law Firm Optimization Platform</div>', unsafe_allow_html=True)
+
+        username = st.text_input("Username")
+        password = st.text_input("Password", type="password")
+
+        login_btn = st.button("Login", use_container_width=True)
+
+        if login_btn:
+            if username in USER_CREDENTIALS and USER_CREDENTIALS[username] == password:
+                st.session_state.logged_in = True
+                st.session_state.username = username
+                st.success(f"Welcome, {username}")
+                st.rerun()
+            else:
+                st.error("Invalid username or password")
+
+        st.markdown('</div>', unsafe_allow_html=True)
 
 
 if not st.session_state.logged_in:
     login()
     st.stop()
+
+# -------------------- Login Credential System --------------------
+# USER_CREDENTIALS = {
+#     "Admin": "admin123",
+#     "exluser": "exl2025"
+# }
+
+# if "logged_in" not in st.session_state:
+#     st.session_state.logged_in = False
+#     st.session_state.username = ""
+
+
+# def login():
+#     st.image("exl logo.png", use_container_width=True)
+
+#     username = st.text_input("Username")
+#     password = st.text_input("Password", type="password")
+#     login_btn = st.button("Login")
+
+#     if login_btn:
+#         if username in USER_CREDENTIALS and USER_CREDENTIALS[username] == password:
+#             st.session_state.logged_in = True
+#             st.session_state.username = username
+#             st.success(f"✅ Welcome, {username}!")
+#             st.rerun()
+#         else:
+#             st.error("❌ Invalid username or password")
+
+
+# if not st.session_state.logged_in:
+#     login()
+#     st.stop()
 # -------------------- App Config and Style --------------------
 st.set_page_config(page_title="Litigation Dashboard", layout="wide")
 
