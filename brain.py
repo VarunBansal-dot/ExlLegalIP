@@ -1848,7 +1848,7 @@ elif selected_screen == "Law Firm Assignment":
 
     st.subheader("Allocation Control")
     case_alloc_threshold = st.slider(
-    "Case Allocated Threshold",
+    "Case Allocated Threshold (%)",
     min_value=0,
     max_value=100,
     value=20,
