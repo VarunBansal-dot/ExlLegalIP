@@ -44,34 +44,34 @@ def login():
     # ---------------- RIGHT SIDE (Logo + Login) ----------------
     with col2:
 
-    # Create inner columns for right alignment
+        # Create inner columns for right alignment
         logo_col1, logo_col2 = st.columns([1, 1])
 
-    with logo_col2:
-        st.image("exl logo.png", width=300)
+        with logo_col2:
+            st.image("exl logo.png", width=300)
 
-    st.markdown("""
-<div style="
-    font-size: 30px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    background: linear-gradient(90deg, #2563eb, #06b6d4);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-top: 20px;
-">
-Claims Litigation360
-</div>
-""", unsafe_allow_html=True)
+        st.markdown("""
+        <div style="
+            font-size: 30px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, #2563eb, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: 20px;
+        ">
+        Claims Litigation360
+        </div>
+        """, unsafe_allow_html=True)
 
-    st.caption("AI-Driven Law Firm Optimization Platform")
+        # st.caption("AI-Driven Law Firm Optimization Platform")
 
-    st.markdown("---")
+        st.markdown("---")
 
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
+        username = st.text_input("Username")
+        password = st.text_input("Password", type="password")
 
-    login_btn = st.button("Login", use_container_width=True)
+        login_btn = st.button("Login", use_container_width=True)
 
         if login_btn:
             if username in USER_CREDENTIALS and USER_CREDENTIALS[username] == password:
