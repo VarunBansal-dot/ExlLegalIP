@@ -1959,6 +1959,7 @@ elif selected_screen == "Law Firm Assignment":
                     f"{round(row['Win rate proxy'] * 100, 1)}%",
                     f"{int(row['Cost per case'])}",
                     f"{int(row['Cycle time'])} Days",
+                    f"{round(row['Case_Allocation'] * 1, 1)}%",
                     row['Firm_Profile']
                 )
             )
@@ -1979,7 +1980,8 @@ elif selected_screen == "Law Firm Assignment":
                         <b>Win Rate:</b> {firm[2]}<br>
                         <b>Avg Cost per case:</b> {firm[3]}<br>
                         <b>Cycle Time:</b> {firm[4]}<br>
-                        <b>Firm Profile:</b> {firm[5]}<br>
+                        <b>Case Allocation:</b> {firm[5]}<br>
+                        <b>Firm Profile:</b> {firm[6]}<br>
                     </div>
                     """,
                     unsafe_allow_html=True
@@ -2106,6 +2108,7 @@ elif selected_screen == "Law Firm Assignment":
                     f"{round(row['Win rate proxy'] * 100, 1)}%",
                     f"{int(row['Cost per case'])}",
                     f"{int(row['Cycle time'])} Days",
+                    f"{round(row['Case_Allocation'] * 1, 1)}%",
                     row['Firm_Profile']
                 )
             )
@@ -2126,7 +2129,8 @@ elif selected_screen == "Law Firm Assignment":
                             <b>Win Rate:</b> {firm[2]}<br>
                             <b>Avg Cost:</b> {firm[3]}<br>
                             <b>Cycle Time:</b> {firm[4]}<br>
-                            <b>Firm Profile:</b> {firm[5]}<br>       
+                            <b>Case Allocation:</b> {firm[5]}<br>
+                            <b>Firm Profile:</b> {firm[6]}<br>       
                         </div>
                         """,
                         unsafe_allow_html=True
