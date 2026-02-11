@@ -18,7 +18,6 @@ import ast
 #---------------------NEW LANDING PAGE-----------------------------
 # -------------------- AI Themed Styling --------------------
 # --------------------- NEW LANDING PAGE -----------------------------
-import streamlit as st
 
 st.set_page_config(layout="wide")
 
