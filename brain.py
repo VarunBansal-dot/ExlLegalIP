@@ -45,10 +45,10 @@ def login():
     with col2:
 
         # EXL Logo
-        st.image("exl_logo.png", width=140)
+        st.image("exl_logo.png", use_container_width=True)
 
-        st.markdown("## Auto BI Litigation Intelligence")
-        st.caption("AI-Driven Law Firm Optimization Platform")
+        st.markdown("## Claims Litigation360")
+        # st.caption("AI-Driven Law Firm Optimization Platform")
 
         st.markdown("---")
 
