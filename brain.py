@@ -45,7 +45,7 @@ def login():
     with col2:
 
     # Create inner columns for right alignment
-    logo_col1, logo_col2 = st.columns([1, 1])
+        logo_col1, logo_col2 = st.columns([1, 1])
 
     with logo_col2:
         st.image("exl logo.png", width=300)
