@@ -1849,9 +1849,9 @@ elif selected_screen == "Law Firm Assignment":
     st.subheader("Allocation Control")
     case_alloc_threshold = st.slider(
     "Case Allocated Threshold",
-    min_value=5,
+    min_value=0,
     max_value=100,
-    value=50,
+    value=20,
     step=5)
 
     
@@ -1916,7 +1916,13 @@ elif selected_screen == "Law Firm Assignment":
             )
         ]
 
-        Lit_data_firm_filter_df = Lit_data_firm_filter_df[Lit_data_firm_filter_df["Case_Allocation"]<case_alloc_threshold]
+        Lit_data_firm_filter_df = Lit_data_firm_filter_df[Lit_data_firm_filter_df["Case_Allocation"]<=case_alloc_threshold]
+        
+        if Lit_data_firm_filter_df.empty:
+            st.warning("No firms meet the selected allocation threshold.")
+        else:
+            Lit_data_firm_filter_df = Lit_data_firm_filter_df.copy()
+
 
 
         # ---- Compute weighted score ----
@@ -2055,7 +2061,12 @@ elif selected_screen == "Law Firm Assignment":
                 fr"\b{state}\b", na=False
             )
         ]
-        Lit_data_firm_filter_df = Lit_data_firm_filter_df[Lit_data_firm_filter_df["Case_Allocation"]<case_alloc_threshold]
+        Lit_data_firm_filter_df = Lit_data_firm_filter_df[Lit_data_firm_filter_df["Case_Allocation"] <= case_alloc_threshold]
+
+        if Lit_data_firm_filter_df.empty:
+            st.warning("No firms meet the selected allocation threshold.")
+        else:
+            Lit_data_firm_filter_df = Lit_data_firm_filter_df.copy()
 
         # ---- Compute weighted score ----
 
