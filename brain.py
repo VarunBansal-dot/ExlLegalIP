@@ -16,10 +16,7 @@ import numpy as np
 import ast
 
 #---------------------NEW LANDING PAGE-----------------------------
-# -------------------- AI Themed Styling --------------------
-# --------------------- NEW LANDING PAGE -----------------------------
-
-# MUST be first Streamlit command in entire script
+# MUST be first Streamlit command
 st.set_page_config(layout="wide")
 
 # -------------------- Login Credential System --------------------
@@ -35,7 +32,6 @@ if "logged_in" not in st.session_state:
 
 def login():
 
-    # Create proper 2-column layout
     col1, col2 = st.columns([1.2, 1], gap="large")
 
     # ---------------- LEFT SIDE (Image) ----------------
@@ -45,12 +41,16 @@ def login():
             use_container_width=True
         )
 
-    # ---------------- RIGHT SIDE (Login) ----------------
+    # ---------------- RIGHT SIDE (Logo + Login) ----------------
     with col2:
-        # st.markdown("## Auto BI Litigation Intelligence")
-        # st.caption("AI-Driven Law Firm Optimization Platform")
 
-        # st.markdown("---")
+        # EXL Logo
+        st.image("exl_logo.png", width=140)
+
+        st.markdown("## Auto BI Litigation Intelligence")
+        st.caption("AI-Driven Law Firm Optimization Platform")
+
+        st.markdown("---")
 
         username = st.text_input("Username")
         password = st.text_input("Password", type="password")
