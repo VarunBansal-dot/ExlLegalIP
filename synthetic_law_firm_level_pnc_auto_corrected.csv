@@ -1,201 +1,201 @@
-Firm Name,Paid post appeal,Case closed count,Deduction fee,Deduction expense,Billed units fee,Billed expense,Billed fee,Paid fee,Paid expense,Cycle time,L100,L200,L300,L400,L500,Win rate proxy,Cost per case,Fee per unit,Cluster,Cluster_name,state_list,Firm_Profile
-"Phillips & Garcia, LLP",282623.25,183,1321.37,79.33,1528.84,3582.6,21237.29,16030.82,2522.07,1539.19,1,1,1,1,0,0.755,101.38,13.89,2,Outcome Specialists,,#N/A
-"Carter, Davis & Partners",1572802.51,83,7359.08,2290.66,9516.25,19900.3,118669.14,84696.96,18165.46,1767.85,1,1,0,1,0,0.714,1239.31,12.47,3,Efficient Volume Handlers,,#N/A
+Firm Name,Paid post appeal,Case closed count,Deduction fee,Deduction expense,Billed units fee,Billed expense,Billed fee,Paid fee,Paid expense,Cycle time,L100,L200,L300,L400,L500,Win rate proxy,Cost per case,Fee per unit,Cluster,Cluster_name,state_list,Firm_Profile,Case_Allocation
+"Phillips & Garcia, LLP",282623.25,183,1321.37,79.33,1528.84,3582.6,21237.29,16030.82,2522.07,1539.19,1,1,1,1,0,0.755,101.38,13.89,2,Outcome Specialists,,#N/A,
+"Carter, Davis & Partners",1572802.51,83,7359.08,2290.66,9516.25,19900.3,118669.14,84696.96,18165.46,1767.85,1,1,0,1,0,0.714,1239.31,12.47,3,Efficient Volume Handlers,,#N/A,
 "Campbell & Kennedy, LLP",1104348.44,203,8421.85,994.41,9333.17,12941.96,105826.61,78467.53,11770.45,836.81,1,1,1,0,0,0.741,444.52,11.34,3,Efficient Volume Handlers,"['MI', 'MI', 'OK', 'GA', 'OK', 'MA']"," - High severity with complex liability and coverage disputes.
  - Soft tissue injuries common; extensive medical documentation involved.
- - Best suited for firms experienced in complex commercial claims."
-"Turner, Thompson & Carter, P.C.",84290.69,108,3558.22,560.23,2143.67,8260.68,26339.27,23089.16,6155.14,541.33,1,1,1,0,1,0.877,270.78,12.29,2,Outcome Specialists,,#N/A
+ - Best suited for firms experienced in complex commercial claims.",1
+"Turner, Thompson & Carter, P.C.",84290.69,108,3558.22,560.23,2143.67,8260.68,26339.27,23089.16,6155.14,541.33,1,1,1,0,1,0.877,270.78,12.29,2,Outcome Specialists,,#N/A,
 "Collins, Turner & Partners",54725.29,127,5892.54,1733.63,6296.8,16132.45,56716.12,50413.09,14046.98,1458.61,0,1,1,0,0,0.889,507.56,9.01,3,Efficient Volume Handlers,"['GA', 'LA']"," - High complexity with extended litigation and multiple parties
  - Soft tissue neck and shoulder injuries frequently disputed
- - Best suited for firms experienced in complex litigation and negotiations"
-"Edwards, Lewis & Partners",1628441.43,62,4503.39,805.11,3362.79,10319.88,32469.6,22216.32,8110.23,636.62,1,1,1,1,0,0.684,489.14,9.66,2,Outcome Specialists,,#N/A
-"Taylor & Campbell, LLP",2079993.24,37,5448.39,272.01,2904.14,2026.58,37701.41,30867.26,1824.16,5010.63,1,0,0,1,1,0.819,883.55,12.98,2,Outcome Specialists,,#N/A
+ - Best suited for firms experienced in complex litigation and negotiations",2
+"Edwards, Lewis & Partners",1628441.43,62,4503.39,805.11,3362.79,10319.88,32469.6,22216.32,8110.23,636.62,1,1,1,1,0,0.684,489.14,9.66,2,Outcome Specialists,,#N/A,
+"Taylor & Campbell, LLP",2079993.24,37,5448.39,272.01,2904.14,2026.58,37701.41,30867.26,1824.16,5010.63,1,0,0,1,1,0.819,883.55,12.98,2,Outcome Specialists,,#N/A,
 "Foster, Nelson & Thompson, P.C.",974066.77,190,5591.7,1126.62,7446.37,9100.64,72495.91,54874.05,7735.21,2255.83,1,0,1,0,0,0.757,329.52,9.74,3,Efficient Volume Handlers,"['MI', 'NJ', 'CT', 'MI']"," - Low severity, high complexity with multiple parties involved.
  - Common injuries: soft tissue, lumbar, chronic pain.
- - Extended litigation, frequent disputes, requires experienced litigation firm."
-"Edwards & Parker, LLP",378157.86,84,1640.13,1866.6,1415.58,20258.05,19390.56,13505.52,18294.65,1440.9,1,0,1,1,0,0.746,378.57,13.7,0,High-Value Core Firms,,#N/A
+ - Extended litigation, frequent disputes, requires experienced litigation firm.",3
+"Edwards & Parker, LLP",378157.86,84,1640.13,1866.6,1415.58,20258.05,19390.56,13505.52,18294.65,1440.9,1,0,1,1,0,0.746,378.57,13.7,0,High-Value Core Firms,,#N/A,
 "Jackson, Scott & Partners",837102.39,150,4524.24,2007.74,2308.66,13702.85,30670.27,22038.57,10171.29,1464.84,0,0,1,0,1,0.769,214.73,13.28,0,High-Value Core Firms,"['MI', 'GA']"," - High settlement demands, no offers or counters made.
  - Moderate bodily injury, therapy ongoing, potential exaggeration.
- - Complex claims; suited for firms with strong negotiation skills."
+ - Complex claims; suited for firms with strong negotiation skills.",20
 "Carter & Associates, LLP",2535641.05,169,4982.21,1634.4,2523.74,18794.85,33380.82,23072.13,13323.33,1109.52,1,1,0,0,0,0.691,215.36,13.23,3,Efficient Volume Handlers,['MI']," - High attorney involvement; frequent legal communications noted.
  - Soft tissue injuries; outpatient care required.
- - Coverage complexity; commercial auto endorsements under scrutiny."
-"Turner, Phillips & Partners",1258109.34,15,4278.78,318.78,4849.65,13378.25,59083.93,46776.25,10084.55,2065.95,1,0,0,0,1,0.792,3790.72,12.18,1,High-Cost/ Underperformers,,#N/A
-"White, Scott & Parker, P.C.",562455.1,48,1761.34,678.38,5062.55,5756.48,47378.28,34948.61,4299.58,1275.49,1,1,1,0,1,0.738,817.67,9.36,2,Outcome Specialists,,#N/A
+ - Coverage complexity; commercial auto endorsements under scrutiny.",2
+"Turner, Phillips & Partners",1258109.34,15,4278.78,318.78,4849.65,13378.25,59083.93,46776.25,10084.55,2065.95,1,0,0,0,1,0.792,3790.72,12.18,1,High-Cost/ Underperformers,,#N/A,
+"White, Scott & Parker, P.C.",562455.1,48,1761.34,678.38,5062.55,5756.48,47378.28,34948.61,4299.58,1275.49,1,1,1,0,1,0.738,817.67,9.36,2,Outcome Specialists,,#N/A,
 "Hughes, Martin & Partners",218293.05,75,8760.04,655.99,6279.83,7833.39,66685.48,46654.68,6757.21,2823.73,0,0,0,1,1,0.7,712.16,10.62,3,Efficient Volume Handlers,['MI']," - Moderate bodily injury severity; therapy ongoing.  
  - Coverage disputes; commercial auto endorsements under review.  
- - High complexity; unresolved claims and billing issues present."
+ - High complexity; unresolved claims and billing issues present.",1
 "Parker & Associates, LLP",173380.73,132,624.08,807.06,1087.11,11032.85,10905.27,7841.75,9107.09,1219.17,1,0,0,1,1,0.769,128.4,10.03,0,High-Value Core Firms,['AR']," - Low severity, soft tissue neck injury claims
  - High attorney representation; external counsel involvement
- - Suitable for firms experienced in negotiation and settlement"
+ - Suitable for firms experienced in negotiation and settlement",20
 "Nelson, Carter & Partners",1260327.31,78,34643.65,294.43,41419.65,27822.24,422933.12,290418.67,19730.62,1836.47,0,0,0,1,1,0.687,3976.27,10.21,3,Efficient Volume Handlers,"['LA', 'CT', 'MI']"," - High complexity with unresolved claims and liability disputes  
  - Chronic pain and long-term disability claims prevalent  
- - Best suited for firms with strong negotiation and litigation skills"
+ - Best suited for firms with strong negotiation and litigation skills",2
 "Thompson, Henderson & Roberts, P.C.",829604.14,198,6745.47,828.94,8864.7,8870.7,113516.24,76393.73,8195.66,1130.84,1,1,1,0,1,0.673,427.22,12.81,3,Efficient Volume Handlers,"['OK', 'MI', 'MA', 'MI', 'OK']"," - Moderate severity with extensive documentation and litigation.
  - Soft tissue injuries common; therapy ongoing.
- - Complex claims require experienced litigation-focused law firms."
+ - Complex claims require experienced litigation-focused law firms.",3
 "Young & Thompson, LLP",821759.12,179,14092.22,872.61,9058.7,9557.75,92490.35,66809.78,7916.79,2518.03,1,1,0,1,1,0.722,417.47,10.21,3,Efficient Volume Handlers,"['GA', 'FL', 'OH', 'MI', 'MD', 'MI', 'NY']"," - Moderate severity, frequent soft tissue and back injuries.
  - High attorney involvement, extended litigation and negotiation.
- - Suited for firms with strong litigation and negotiation skills."
+ - Suited for firms with strong litigation and negotiation skills.",2
 "Phillips, Roberts & Partners",272196.47,111,2920.36,676.1,4865.63,5021.92,46044.7,32271.68,3880.83,3323.8,1,1,1,0,0,0.701,325.7,9.46,2,Outcome Specialists,['MI']," - Extended litigation with stalled negotiations and ongoing medical monitoring  
  - Soft tissue neck injury with late-introduced treatments  
- - Best suited for firms experienced in complex, multi-vehicle claims"
+ - Best suited for firms experienced in complex, multi-vehicle claims",50
 "Young & White, LLP",1257915.56,202,3822.52,1033.55,4095.54,7787.78,49110.87,35940.48,7182.26,4597.96,1,1,1,1,0,0.732,213.48,11.99,3,Efficient Volume Handlers,"['PA', 'MI', 'MI']"," - High complexity with extended litigation and documentation required.
  - Multiple injuries, including soft tissue and unknown, involved.
- - Best suited for firms experienced in commercial liability disputes."
-"Murphy & Williams, LLP",194187,87,5152.41,811.77,2825.69,9637.72,29641.68,19587,8989.47,2472.55,1,1,1,1,0,0.661,328.47,10.49,2,Outcome Specialists,,#N/A
-Sanchez Baker Law Group,443500.83,143,1096.22,542.24,3035.7,13532.32,28122.05,23644.12,12646.41,1166.29,0,1,0,0,1,0.891,253.78,9.26,0,High-Value Core Firms,,#N/A
+ - Best suited for firms experienced in commercial liability disputes.",1
+"Murphy & Williams, LLP",194187,87,5152.41,811.77,2825.69,9637.72,29641.68,19587,8989.47,2472.55,1,1,1,1,0,0.661,328.47,10.49,2,Outcome Specialists,,#N/A,
+Sanchez Baker Law Group,443500.83,143,1096.22,542.24,3035.7,13532.32,28122.05,23644.12,12646.41,1166.29,0,1,0,0,1,0.891,253.78,9.26,0,High-Value Core Firms,,#N/A,
 "Henderson & Edwards, LLP",712736.19,146,6317.16,705.37,3894.61,27879.18,45106.6,37168.16,25726.9,1787.54,1,1,1,1,0,0.824,430.79,11.58,3,Efficient Volume Handlers,"['IN', 'LA', 'IL', 'NJ', 'TN', 'GA']"," - High attorney representation; complex liability and coverage disputes.
  - Common injuries: knee, soft tissue, shoulder surgery.
- - Best for firms skilled in complex, multi-party litigation."
+ - Best for firms skilled in complex, multi-party litigation.",2
 "Kennedy, Nelson & Foster, P.C.",172394.86,111,3145.19,2588.93,3265.11,41770.85,35936.72,28124.55,36384.92,1154.97,0,1,0,1,0,0.783,581.17,11.01,3,Efficient Volume Handlers,['MI']," - Low severity, single-vehicle incidents with coverage disputes  
  - Arbitration and depositions indicate moderate litigation posture  
- - Best suited for firms skilled in coverage disputes"
+ - Best suited for firms skilled in coverage disputes",3
 "Taylor, Young & Collins, P.C.",231268.19,195,7234.09,1498.86,5393.29,13182.24,57785.74,39148.8,11991.87,2913.24,1,0,0,1,0,0.677,262.26,10.71,3,Efficient Volume Handlers,"['VA', 'MA', 'LA']"," - Moderate severity, extended litigation process anticipated.
  - Frequent attorney involvement, lien resolution complicates settlements.
- - Best suited for firms skilled in complex negotiations."
+ - Best suited for firms skilled in complex negotiations.",2
 "Walker, Taylor & Murphy, P.C.",2011386,169,4829.02,709.96,3827.86,21834.39,48513.09,40436.15,19694.14,1395.99,1,0,1,0,0,0.834,355.8,12.67,3,Efficient Volume Handlers,"['OH', 'FL', 'NY']"," - High severity claims with complex litigation and arbitration.
  - Common injuries: thoracic area, soft tissue, unclassified.
- - Best suited for firms with arbitration and litigation expertise."
-Turner Murphy Law Group,323964.67,53,2836.98,200.03,2589.87,4129.72,30293.79,19723.23,3377.85,986.41,1,1,1,1,0,0.651,435.87,11.7,2,Outcome Specialists,,#N/A
+ - Best suited for firms with arbitration and litigation expertise.",10
+Turner Murphy Law Group,323964.67,53,2836.98,200.03,2589.87,4129.72,30293.79,19723.23,3377.85,986.41,1,1,1,1,0,0.651,435.87,11.7,2,Outcome Specialists,,#N/A,
 "Stevens & Lewis, LLP",114105.92,191,7754.32,2068.82,3186.17,14603.42,44588.19,30070.54,13827.89,1331.88,1,1,1,0,1,0.674,229.83,13.99,3,Efficient Volume Handlers,"['CT', 'FL', 'NJ', 'MI', 'NJ']"," - High attorney representation; complex liability and negotiation issues.
  - Frequent arbitration requests; ongoing disputes over medical necessity.
- - Best suited for firms experienced in complex liability and arbitration."
+ - Best suited for firms experienced in complex liability and arbitration.",20
 "Hughes, Garcia & Lewis, P.C.",1187058.67,217,9814.53,33.33,6439.2,3258.63,68698.3,53688.5,2299.61,2678.15,0,0,1,1,0,0.782,258.01,10.67,2,Outcome Specialists,['CT']," - High complexity due to unresolved claims and coverage disputes  
  - Chronic pain and unresolved medical evidence complicate negotiations  
- - Best suited for firms experienced in complex settlements and liens"
+ - Best suited for firms experienced in complex settlements and liens",40
 Anderson Young Law Group,299948.11,149,1808.7,1309.96,1397.87,12850.43,16561.68,11210.56,11071.79,867.01,1,0,0,0,1,0.727,149.55,11.85,0,High-Value Core Firms,['MI']," - Extended litigation with potential injury exaggeration.
  - Multi-vehicle collision with disputed coverage and reimbursement.
- - Best suited for firms with strong litigation capabilities."
-"Nelson & Associates, LLP",238526.74,52,1243.23,904.58,1440.36,14500.69,16266.09,14252.87,13131.63,2708.97,0,1,1,1,0,0.926,526.62,11.29,0,High-Value Core Firms,,#N/A
-"Scott, Phillips & Partners",722350.66,10,1814.95,517.31,1151.4,21647.49,11650.09,8175.17,17386.99,2145.41,0,0,0,1,1,0.702,2556.22,10.12,1,High-Cost/ Underperformers,,#N/A
-"Campbell & Associates, LLP",644201.87,10,8692.49,1003.36,5361.95,7633.4,55410.53,38600.89,6764.44,1563.59,1,1,1,0,1,0.697,4536.53,10.33,1,High-Cost/ Underperformers,,#N/A
+ - Best suited for firms with strong litigation capabilities.",15
+"Nelson & Associates, LLP",238526.74,52,1243.23,904.58,1440.36,14500.69,16266.09,14252.87,13131.63,2708.97,0,1,1,1,0,0.926,526.62,11.29,0,High-Value Core Firms,,#N/A,
+"Scott, Phillips & Partners",722350.66,10,1814.95,517.31,1151.4,21647.49,11650.09,8175.17,17386.99,2145.41,0,0,0,1,1,0.702,2556.22,10.12,1,High-Cost/ Underperformers,,#N/A,
+"Campbell & Associates, LLP",644201.87,10,8692.49,1003.36,5361.95,7633.4,55410.53,38600.89,6764.44,1563.59,1,1,1,0,1,0.697,4536.53,10.33,1,High-Cost/ Underperformers,,#N/A,
 "Taylor & Associates, LLP",143138.07,117,13890.9,493.26,12726.05,4561.79,123962.34,109723.95,4025.81,1113.44,1,1,0,0,1,0.885,972.22,9.74,3,Efficient Volume Handlers,['MI']," - High complexity with frequent attorney involvement and court filings  
  - Chronic pain claims and policy limit disputes common  
- - Best suited for firms skilled in complex negotiations and SIU cases"
-"Campbell, Jackson & Carter, P.C.",473600.55,43,3451.36,1063.78,4256.29,14124.24,43708.12,31384.72,11947.61,2735.45,1,0,0,1,0,0.718,1007.73,10.27,1,High-Cost/ Underperformers,,#N/A
+ - Best suited for firms skilled in complex negotiations and SIU cases",2
+"Campbell, Jackson & Carter, P.C.",473600.55,43,3451.36,1063.78,4256.29,14124.24,43708.12,31384.72,11947.61,2735.45,1,0,0,1,0,0.718,1007.73,10.27,1,High-Cost/ Underperformers,,#N/A,
 Walker Henderson Law Group,897123.83,157,10126.22,1032.41,8919.77,7483.48,123446.05,110469.36,5365.64,1684.07,1,0,1,1,1,0.895,737.8,13.84,3,Efficient Volume Handlers,"['CT', 'MI', 'LA', 'NY', 'TN', 'VA']"," - High attorney representation; extended litigation likely.
  - Common injuries: soft tissue and multiple body parts.
- - Complex claims; suitable for firms with litigation expertise."
+ - Complex claims; suitable for firms with litigation expertise.",2
 "Campbell, Davis & Partners",409321.5,199,1381.13,538.25,1706.37,8978.17,19524.76,17358.39,8342.93,1963.85,1,1,0,0,0,0.939,129.15,11.44,0,High-Value Core Firms,"['OH', 'OH']"," - Moderate complexity with potential exaggeration and coverage disputes.
  - Soft tissue injuries, chronic pain allegations, no hospital treatment.
- - Best suited for firms experienced in arbitration and SIU cases."
+ - Best suited for firms experienced in arbitration and SIU cases.",6
 "Garcia, Davis & Partners",681422.18,111,2199.1,1422.36,1742.23,13723.88,18493.85,16304.82,11210.72,2680.86,0,1,0,1,1,0.932,247.89,10.62,0,High-Value Core Firms,['FL']," - Single vehicle, knee injury, Florida jurisdiction  
  - Stalled negotiations, arbitration requested, liability dispute  
- - Low complexity, minimal treatment, suitable for small firm"
-"Baker, Carter & Partners",1735406.74,23,3510.26,617.2,4094.65,6976.12,39433.41,35425.72,5735.83,839.96,1,1,1,0,1,0.898,1789.63,9.63,1,High-Cost/ Underperformers,,#N/A
-Stevens Garcia Law Group,256005.82,10,922.3,70.98,1070.29,6516.06,14507.11,9531.35,5263.46,1800.72,0,1,0,1,1,0.657,1479.48,13.55,2,Outcome Specialists,,#N/A
-"Scott & Williams, LLP",198064.72,174,1256.33,996.72,2743.35,8354.6,31512.77,22683.8,7844.29,1136.27,1,0,0,1,1,0.72,175.45,11.49,2,Outcome Specialists,,#N/A
+ - Low complexity, minimal treatment, suitable for small firm",7
+"Baker, Carter & Partners",1735406.74,23,3510.26,617.2,4094.65,6976.12,39433.41,35425.72,5735.83,839.96,1,1,1,0,1,0.898,1789.63,9.63,1,High-Cost/ Underperformers,,#N/A,
+Stevens Garcia Law Group,256005.82,10,922.3,70.98,1070.29,6516.06,14507.11,9531.35,5263.46,1800.72,0,1,0,1,1,0.657,1479.48,13.55,2,Outcome Specialists,,#N/A,
+"Scott & Williams, LLP",198064.72,174,1256.33,996.72,2743.35,8354.6,31512.77,22683.8,7844.29,1136.27,1,0,0,1,1,0.72,175.45,11.49,2,Outcome Specialists,,#N/A,
 "Young & Associates, LLP",902546.97,158,3195.05,1336.32,4814.02,18149.77,46491.7,37421.66,13818.84,2469.15,0,1,0,0,1,0.805,324.31,9.66,3,Efficient Volume Handlers,"['PA', 'VA', 'MI']"," - Moderate severity with contested neck soft tissue injuries
  - High attorney involvement, frequent arbitration and negotiation
- - Complex claims needing experienced litigation-focused law firms"
-"Parker & Collins, LLP",408400.89,184,1927.01,289.97,2401.7,6865.53,22028.41,17996.44,5525.77,2318.95,1,0,0,0,1,0.817,127.84,9.17,2,Outcome Specialists,,#N/A
-"Roberts, Mitchell & Williams, P.C.",408642.1,95,2830.35,332.78,4673.4,2817.49,42404.53,34808.47,2031.37,2124.59,0,0,1,1,1,0.821,387.79,9.07,2,Outcome Specialists,,#N/A
-"Baker, Kennedy & Scott, P.C.",433453.02,114,759.65,1092.54,446.95,38516.77,5343.99,3847.42,28443.95,2165.2,1,1,0,0,1,0.77,283.26,11.96,0,High-Value Core Firms,,#N/A
+ - Complex claims needing experienced litigation-focused law firms",2
+"Parker & Collins, LLP",408400.89,184,1927.01,289.97,2401.7,6865.53,22028.41,17996.44,5525.77,2318.95,1,0,0,0,1,0.817,127.84,9.17,2,Outcome Specialists,,#N/A,
+"Roberts, Mitchell & Williams, P.C.",408642.1,95,2830.35,332.78,4673.4,2817.49,42404.53,34808.47,2031.37,2124.59,0,0,1,1,1,0.821,387.79,9.07,2,Outcome Specialists,,#N/A,
+"Baker, Kennedy & Scott, P.C.",433453.02,114,759.65,1092.54,446.95,38516.77,5343.99,3847.42,28443.95,2165.2,1,1,0,0,1,0.77,283.26,11.96,0,High-Value Core Firms,,#N/A,
 Baker Parker Law Group,789331.98,130,1771.25,606.83,1647.46,20263.18,20570.39,14709.43,16158.29,2495.86,0,0,1,0,1,0.765,237.44,12.49,0,High-Value Core Firms,"['MI', 'MI', 'MA']"," - High demand, zero offers; complex with multiple unresolved claims.
  - Soft tissue injuries; pre-existing conditions complicate treatment.
- - Extended litigation; suitable for firms with strong negotiation skills."
-"Scott, Henderson & Sanchez, P.C.",228184.83,96,2006.04,816.45,1875.26,24827.12,16879.89,13313.33,19287.26,3553.22,0,0,1,0,1,0.839,339.59,9,0,High-Value Core Firms,,#N/A
-"Roberts, Lewis & Jackson, P.C.",367034.37,70,2225.67,852.97,1649.62,10523.9,15024.53,11698.43,7706.61,1529.12,0,1,0,0,1,0.829,277.21,9.11,0,High-Value Core Firms,,#N/A
-"Taylor, Lewis & Partners",234636.24,25,5236.25,2053.09,4714.48,90782.73,46490.14,37839.51,81167.44,8619.86,0,0,1,0,1,0.814,4760.28,9.86,1,High-Cost/ Underperformers,,#N/A
+ - Extended litigation; suitable for firms with strong negotiation skills.",8
+"Scott, Henderson & Sanchez, P.C.",228184.83,96,2006.04,816.45,1875.26,24827.12,16879.89,13313.33,19287.26,3553.22,0,0,1,0,1,0.839,339.59,9,0,High-Value Core Firms,,#N/A,
+"Roberts, Lewis & Jackson, P.C.",367034.37,70,2225.67,852.97,1649.62,10523.9,15024.53,11698.43,7706.61,1529.12,0,1,0,0,1,0.829,277.21,9.11,0,High-Value Core Firms,,#N/A,
+"Taylor, Lewis & Partners",234636.24,25,5236.25,2053.09,4714.48,90782.73,46490.14,37839.51,81167.44,8619.86,0,0,1,0,1,0.814,4760.28,9.86,1,High-Cost/ Underperformers,,#N/A,
 "Young & Sanchez, LLP",376460.55,219,5975.55,517.67,5386.25,23581.41,62559.09,51924.16,17879.57,2873.43,1,1,1,0,1,0.83,318.74,11.61,3,Efficient Volume Handlers,"['MI', 'FL', 'VA', 'MI']"," - Moderate severity, ongoing therapy, frequent attorney involvement.
  - Liability and coverage disputes, extended negotiation anticipated.
- - Best suited for firms with litigation and negotiation expertise."
-"Murphy, Williams & Mitchell, P.C.",280297.31,69,4054.2,108.51,7736.75,7245.39,94339.31,77112.51,5359.16,992.09,1,0,1,1,0,0.817,1195.24,12.19,2,Outcome Specialists,,#N/A
-"Sanchez & Walker, LLP",618193.02,156,4774.63,379.04,3800.57,7114.25,51776.5,44200.2,6518.72,836.63,0,1,1,1,1,0.854,325.12,13.62,2,Outcome Specialists,,#N/A
-"Lewis, Davis & Williams, P.C.",3220411.1,64,492.2,4774.9,2090.3,52999.67,24442.96,20581.75,43656.91,2301.1,0,1,1,1,1,0.892,1003.73,11.69,0,High-Value Core Firms,,#N/A
+ - Best suited for firms with litigation and negotiation expertise.",2
+"Murphy, Williams & Mitchell, P.C.",280297.31,69,4054.2,108.51,7736.75,7245.39,94339.31,77112.51,5359.16,992.09,1,0,1,1,0,0.817,1195.24,12.19,2,Outcome Specialists,,#N/A,
+"Sanchez & Walker, LLP",618193.02,156,4774.63,379.04,3800.57,7114.25,51776.5,44200.2,6518.72,836.63,0,1,1,1,1,0.854,325.12,13.62,2,Outcome Specialists,,#N/A,
+"Lewis, Davis & Williams, P.C.",3220411.1,64,492.2,4774.9,2090.3,52999.67,24442.96,20581.75,43656.91,2301.1,0,1,1,1,1,0.892,1003.73,11.69,0,High-Value Core Firms,,#N/A,
 "Roberts, Kennedy & Partners",1241989.56,160,6400.18,2025.57,6597.96,25356.5,76552.39,54670.1,22068.03,2097.67,1,0,0,0,1,0.714,479.61,11.6,3,Efficient Volume Handlers,"['MA', 'MI', 'MI']"," - High complexity with extended litigation and lien issues.
  - Multiple body parts and neck injuries frequently involved.
- - Best suited for firms with strong negotiation and litigation skills."
+ - Best suited for firms with strong negotiation and litigation skills.",2
 "Anderson & Williams, LLP",147509.87,110,5820.29,838.09,9051.44,19029.09,84483.78,72794.14,17657.24,1136,0,1,0,1,0,0.862,822.29,9.33,3,Efficient Volume Handlers,['NY']," - High complexity with extensive documentation and discovery involved  
  - Surgical intervention claim for shoulder injury  
- - Suited for firms experienced in complex litigation and billing disputes"
-"Edwards & Associates, LLP",578266.26,151,1829.45,212.17,1667.89,4612.9,22660.97,18031.92,3736.02,1404.9,0,1,0,1,1,0.796,144.16,13.59,2,Outcome Specialists,,#N/A
+ - Suited for firms experienced in complex litigation and billing disputes",2
+"Edwards & Associates, LLP",578266.26,151,1829.45,212.17,1667.89,4612.9,22660.97,18031.92,3736.02,1404.9,0,1,0,1,1,0.796,144.16,13.59,2,Outcome Specialists,,#N/A,
 "Hughes & Turner, LLP",42237.96,129,6708.29,1830.6,4714.19,18475.03,52601.03,43958.11,15048.94,986.36,0,1,1,0,0,0.836,457.42,11.16,3,Efficient Volume Handlers,"['MI', 'IN', 'TN', 'NJ', 'MI', 'MI']"," - Moderate severity with extensive negotiation and litigation involvement.
  - Common injuries: neck and back pain, soft tissue.
- - Best for firms skilled in complex, disputed liability cases."
+ - Best for firms skilled in complex, disputed liability cases.",1
 "Taylor, White & Collins, P.C.",231194.48,97,1540.79,1133.33,5991.79,11734.22,56414.71,49831.98,10469.88,2897.2,0,0,1,0,1,0.883,621.67,9.42,3,Efficient Volume Handlers,"['MI', 'LA', 'NY', 'NJ']"," - Moderate severity with high settlement demands exceeding policy limits.
  - Soft tissue injuries, outpatient care, and chronic pain claims.
- - Complex litigation with multiple parties and unresolved prior claims."
-"Henderson, Foster & Baker, P.C.",1113351.75,73,659.36,398.43,1202.3,22825.25,16296.52,13594.37,19637.76,3773.47,0,0,1,0,1,0.884,455.23,13.55,0,High-Value Core Firms,,#N/A
-White Garcia Law Group,1710005.5,85,4888.02,725.59,2599.74,10538.25,34317.99,28848.02,8812.36,836.22,1,0,1,1,0,0.841,443.06,13.2,2,Outcome Specialists,,#N/A
+ - Complex litigation with multiple parties and unresolved prior claims.",1
+"Henderson, Foster & Baker, P.C.",1113351.75,73,659.36,398.43,1202.3,22825.25,16296.52,13594.37,19637.76,3773.47,0,0,1,0,1,0.884,455.23,13.55,0,High-Value Core Firms,,#N/A,
+White Garcia Law Group,1710005.5,85,4888.02,725.59,2599.74,10538.25,34317.99,28848.02,8812.36,836.22,1,0,1,1,0,0.841,443.06,13.2,2,Outcome Specialists,,#N/A,
 "Garcia & Foster, LLP",214574.68,138,906.24,2362.78,1796.18,30648,16195.92,14511.12,24467.73,2325.19,0,0,1,1,0,0.946,282.46,9.02,0,High-Value Core Firms,"['NY', 'NY', 'CT']"," - High demand vs. low offer indicates aggressive negotiation stance.
  - Frequent liability and coverage disputes increase claim complexity.
- - Best suited for firms experienced in commercial auto litigation."
-"Davis, Foster & Turner, P.C.",2305366.74,105,5969.74,710.21,3950.21,9561.75,40101.87,31435.44,7441.67,1378.34,1,0,1,1,0,0.784,370.26,10.15,2,Outcome Specialists,,#N/A
-"Kennedy, Baker & Mitchell, P.C.",426729.55,32,681.46,3106.56,1305.83,32488.01,15957.81,14260.13,24962.33,615.54,0,1,1,0,0,0.944,1225.7,12.22,0,High-Value Core Firms,,#N/A
+ - Best suited for firms experienced in commercial auto litigation.",9
+"Davis, Foster & Turner, P.C.",2305366.74,105,5969.74,710.21,3950.21,9561.75,40101.87,31435.44,7441.67,1378.34,1,0,1,1,0,0.784,370.26,10.15,2,Outcome Specialists,,#N/A,
+"Kennedy, Baker & Mitchell, P.C.",426729.55,32,681.46,3106.56,1305.83,32488.01,15957.81,14260.13,24962.33,615.54,0,1,1,0,0,0.944,1225.7,12.22,0,High-Value Core Firms,,#N/A,
 Nelson Martin Law Group,1134415.6,189,4462.66,1267.22,2531.92,34118.93,31849.53,22709.14,28213.73,972.67,0,1,1,1,1,0.763,269.43,12.58,0,High-Value Core Firms,"['VA', 'CT', 'MI', 'NJ', 'OH', 'NJ']"," - High severity with frequent policy limit challenges  
  - Soft tissue neck injuries, chronic pain claims prevalent  
- - Complex claims needing litigation-focused law firms"
+ - Complex claims needing litigation-focused law firms",2
 Thompson Foster Law Group,1650486.44,208,8077.66,373.3,4419.17,3808.58,47576.6,39514.46,3519.83,4065.16,1,0,0,0,1,0.831,206.9,10.77,2,Outcome Specialists,['MI']," - High severity with potential surgical intervention required  
  - Extended litigation with complex investigation and SIU involvement  
- - Best suited for firms experienced in commercial and multi-vehicle claims"
-"White, Thompson & Partners",627715.65,75,5154.19,941.2,2600.28,10869.5,33988.89,23679.42,8385.1,4639.68,0,1,0,1,0,0.697,427.53,13.07,2,Outcome Specialists,,#N/A
-"Garcia, Baker & Walker, P.C.",235380.16,138,3895.65,1610.33,6331.08,11405.17,69559.14,53022.77,8863.89,4915.71,0,1,1,1,0,0.762,448.45,10.99,3,Efficient Volume Handlers,,#N/A
+ - Best suited for firms experienced in commercial and multi-vehicle claims",10
+"White, Thompson & Partners",627715.65,75,5154.19,941.2,2600.28,10869.5,33988.89,23679.42,8385.1,4639.68,0,1,0,1,0,0.697,427.53,13.07,2,Outcome Specialists,,#N/A,
+"Garcia, Baker & Walker, P.C.",235380.16,138,3895.65,1610.33,6331.08,11405.17,69559.14,53022.77,8863.89,4915.71,0,1,1,1,0,0.762,448.45,10.99,3,Efficient Volume Handlers,,#N/A,
 "Anderson, Garcia & Hughes, P.C.",1459475.34,167,5492.99,891.58,5903.03,12557.5,65194,46285.72,11206.3,949.99,0,1,0,1,1,0.71,344.26,11.04,3,Efficient Volume Handlers,"['MI', 'FL', 'CT', 'GA', 'MI', 'NJ', 'MI', 'MI', 'TX']"," - Moderate severity with extended litigation and complex negotiations.
  - Common injuries: soft tissue and contested injury details.
- - Best suited for firms experienced in complex, multi-party litigation."
-Williams Edwards Law Group,298335.28,63,3022.55,558.48,2386.63,11879.24,28407.24,23731.75,9702.66,2372.55,1,0,0,1,1,0.835,530.7,11.9,2,Outcome Specialists,,#N/A
+ - Best suited for firms experienced in complex, multi-party litigation.",1
+Williams Edwards Law Group,298335.28,63,3022.55,558.48,2386.63,11879.24,28407.24,23731.75,9702.66,2372.55,1,0,0,1,1,0.835,530.7,11.9,2,Outcome Specialists,,#N/A,
 "Williams, Davis & Campbell, P.C.",207793.64,192,13127.34,1065.38,32692.95,9258.07,335601.23,225615.72,8570.11,1850.46,0,0,0,1,1,0.672,1219.72,10.27,3,Efficient Volume Handlers,"['IN', 'LA', 'CT', 'LA', 'MI']"," - Moderate severity with high negotiation complexity.
  - Soft tissue injuries dominate; neck frequently involved.
- - Extended litigation likely; arbitration frequently requested."
-"Jackson & Murphy, LLP",1293162.24,37,5012.01,2738.76,6840.8,23172.4,78190.36,51402.13,19363.57,891.84,1,1,0,1,1,0.657,1912.59,11.43,1,High-Cost/ Underperformers,,#N/A
+ - Extended litigation likely; arbitration frequently requested.",1
+"Jackson & Murphy, LLP",1293162.24,37,5012.01,2738.76,6840.8,23172.4,78190.36,51402.13,19363.57,891.84,1,1,0,1,1,0.657,1912.59,11.43,1,High-Cost/ Underperformers,,#N/A,
 "Walker & Associates, LLP",2298503.49,173,6530.58,550.01,3492.08,22684.61,36365.58,30722.12,19033.23,1672.54,1,1,0,1,1,0.845,287.6,10.41,3,Efficient Volume Handlers,"['IL', 'CT', 'MI']"," - High complexity with extended litigation and negotiation periods  
  - Chronic pain and disputed neck/back injuries prevalent  
- - Best suited for firms experienced in complex, multi-jurisdictional cases"
-"Phillips & Associates, LLP",386736.18,76,4295.89,1516.31,3223,10421.54,31864.12,26370.52,7346.91,1296.73,0,0,1,0,1,0.828,443.65,9.89,2,Outcome Specialists,,#N/A
-"Williams, Martin & Partners",281271.87,192,626.58,2478.65,1043.57,20532.79,10018.27,6922.51,18920.47,2002.85,1,0,0,1,0,0.741,134.6,9.6,0,High-Value Core Firms,,#N/A
+ - Best suited for firms experienced in complex, multi-jurisdictional cases",1
+"Phillips & Associates, LLP",386736.18,76,4295.89,1516.31,3223,10421.54,31864.12,26370.52,7346.91,1296.73,0,0,1,0,1,0.828,443.65,9.89,2,Outcome Specialists,,#N/A,
+"Williams, Martin & Partners",281271.87,192,626.58,2478.65,1043.57,20532.79,10018.27,6922.51,18920.47,2002.85,1,0,0,1,0,0.741,134.6,9.6,0,High-Value Core Firms,,#N/A,
 "Jackson & Associates, LLP",294022.24,150,4711.46,1753.29,3508.49,13325.73,42707.04,29259.15,12061.14,1993.07,1,1,1,0,1,0.685,275.47,12.17,3,Efficient Volume Handlers,"['NY', 'FL', 'MI', 'IL', 'MI', 'IL']"," - Moderate severity with frequent neck and multiple body injuries.
  - High complexity due to coverage and medical billing disputes.
- - Best suited for firms skilled in negotiation and insurance disputes."
-Edwards Taylor Law Group,122304.4,11,16782.21,898.32,8075.66,11821.95,100868.62,73274.68,10293.29,2335.01,1,1,0,0,1,0.726,7597.09,12.49,1,High-Cost/ Underperformers,,#N/A
-"Carter & Martin, LLP",86052.83,81,3647.84,531.41,1753.49,10161.17,20570.07,15940.27,9440.41,1629.61,1,0,0,1,0,0.775,313.34,11.73,2,Outcome Specialists,,#N/A
-"Kennedy, Parker & Edwards, P.C.",1678651.56,67,4224.93,1170.53,1984.88,24357.46,24067.61,20232.23,19421.91,2958.78,0,0,1,0,1,0.891,591.85,12.13,0,High-Value Core Firms,,#N/A
+ - Best suited for firms skilled in negotiation and insurance disputes.",1
+Edwards Taylor Law Group,122304.4,11,16782.21,898.32,8075.66,11821.95,100868.62,73274.68,10293.29,2335.01,1,1,0,0,1,0.726,7597.09,12.49,1,High-Cost/ Underperformers,,#N/A,
+"Carter & Martin, LLP",86052.83,81,3647.84,531.41,1753.49,10161.17,20570.07,15940.27,9440.41,1629.61,1,0,0,1,0,0.775,313.34,11.73,2,Outcome Specialists,,#N/A,
+"Kennedy, Parker & Edwards, P.C.",1678651.56,67,4224.93,1170.53,1984.88,24357.46,24067.61,20232.23,19421.91,2958.78,0,0,1,0,1,0.891,591.85,12.13,0,High-Value Core Firms,,#N/A,
 "Scott, Garcia & Mitchell, P.C.",140208.46,184,1497.28,302.59,670.56,10596.43,9174.43,7304.44,9881.04,840.62,0,1,1,1,1,0.846,93.4,13.68,0,High-Value Core Firms,"['MI', 'NY', 'NJ']"," - Low demand, high negotiation complexity, arbitration frequently requested  
  - Common injuries: neck, shoulder; surgical intervention often claimed  
- - Best for firms skilled in complex negotiations and arbitration"
-"White & Associates, LLP",1429674.51,12,8165.81,1567.27,5201.62,16252.51,61610.02,55317.86,15045.24,1078.85,1,1,1,0,1,0.898,5863.59,11.84,1,High-Cost/ Underperformers,,#N/A
-"Young, Henderson & Lewis, P.C.",531200.06,17,1282.71,320.64,2181.77,11702.18,26039.33,17768.32,9278.05,1656.08,1,1,1,0,0,0.682,1590.96,11.93,1,High-Cost/ Underperformers,,#N/A
-"Turner & Associates, LLP",722864.17,10,3972.64,3520.96,1891.61,32055.03,24479.17,19564.03,25187.92,3113.59,0,0,1,1,1,0.799,4475.19,12.94,1,High-Cost/ Underperformers,,#N/A
-"Jackson & Sanchez, LLP",112807.97,49,2838.46,459.95,5409.46,26595.61,52056.58,38782.77,20849.69,1230.89,0,0,0,1,1,0.745,1216.99,9.62,1,High-Cost/ Underperformers,,#N/A
-"Scott, Baker & Partners",348451.2,100,673.89,3159.97,1078.26,23107.69,10089.94,7952.09,17467.18,3140.31,0,1,0,0,1,0.838,254.19,9.36,0,High-Value Core Firms,,#N/A
+ - Best for firms skilled in complex negotiations and arbitration",3
+"White & Associates, LLP",1429674.51,12,8165.81,1567.27,5201.62,16252.51,61610.02,55317.86,15045.24,1078.85,1,1,1,0,1,0.898,5863.59,11.84,1,High-Cost/ Underperformers,,#N/A,
+"Young, Henderson & Lewis, P.C.",531200.06,17,1282.71,320.64,2181.77,11702.18,26039.33,17768.32,9278.05,1656.08,1,1,1,0,0,0.682,1590.96,11.93,1,High-Cost/ Underperformers,,#N/A,
+"Turner & Associates, LLP",722864.17,10,3972.64,3520.96,1891.61,32055.03,24479.17,19564.03,25187.92,3113.59,0,0,1,1,1,0.799,4475.19,12.94,1,High-Cost/ Underperformers,,#N/A,
+"Jackson & Sanchez, LLP",112807.97,49,2838.46,459.95,5409.46,26595.61,52056.58,38782.77,20849.69,1230.89,0,0,0,1,1,0.745,1216.99,9.62,1,High-Cost/ Underperformers,,#N/A,
+"Scott, Baker & Partners",348451.2,100,673.89,3159.97,1078.26,23107.69,10089.94,7952.09,17467.18,3140.31,0,1,0,0,1,0.838,254.19,9.36,0,High-Value Core Firms,,#N/A,
 "Roberts & Nelson, LLP",137646.26,56,277.39,699.41,775.61,5630.45,7071.44,4635,4122.98,1653.65,1,1,1,1,0,0.705,156.39,9.12,0,High-Value Core Firms,"['MI', 'MI']"," - Moderate severity with suspected fraud and liability disputes.
  - Frequent arbitration and multiple counteroffers indicate complex negotiations.
- - Best suited for firms with strong litigation and negotiation skills."
+ - Best suited for firms with strong litigation and negotiation skills.",4
 Lewis Davis Law Group,574449.6,120,1620.86,2392.63,1134.78,17939.91,10818.16,7229.1,14459.72,2230.15,0,0,1,1,1,0.718,180.74,9.53,0,High-Value Core Firms,['MI']," - High severity with stalled negotiations and fraud indicators  
  - Complex claims with multiple vehicles and liability disputes  
- - Best suited for firms skilled in fraud and complex negotiations"
+ - Best suited for firms skilled in fraud and complex negotiations",2
 Murphy Brown Law Group,679907.81,85,6674.53,1946.27,6420.57,31075.44,75716.19,53140.64,24174.45,2251.59,1,1,1,0,1,0.702,909.59,11.79,3,Efficient Volume Handlers,['TN']," - High settlement demand; exceeds policy limits  
  - Frequent claimant attorney involvement; complex negotiations  
- - Extensive medical documentation; high operational intensity"
-"Foster & Associates, LLP",765966.76,103,497.15,350.66,663.15,9528.59,6945.45,5200.9,7042.78,3058.09,1,0,1,1,1,0.799,118.87,10.47,0,High-Value Core Firms,,#N/A
+ - Extensive medical documentation; high operational intensity",1
+"Foster & Associates, LLP",765966.76,103,497.15,350.66,663.15,9528.59,6945.45,5200.9,7042.78,3058.09,1,0,1,1,1,0.799,118.87,10.47,0,High-Value Core Firms,,#N/A,
 "Garcia & Young, LLP",2776114.32,204,22758.79,2965.88,12510.82,22704.19,158234.65,132759.3,19713.57,1424.04,1,0,0,0,1,0.839,747.42,12.65,3,Efficient Volume Handlers,"['MI', 'TN', 'MI', 'MA']"," - Moderate severity with ongoing liability and coverage disputes  
  - Common injuries: soft tissue, shoulder/arm, unknown  
- - Best suited for firms with strong negotiation and litigation skills"
+ - Best suited for firms with strong negotiation and litigation skills",1
 "Murphy & Associates, LLP",1871462.75,207,1762.73,794.84,6063.21,8992.09,76020.43,66367.9,6857.33,2655.46,1,1,0,0,1,0.873,353.75,12.54,3,Efficient Volume Handlers,"['MD', 'CT', 'AR', 'NY', 'MI', 'MI']"," - Low severity, moderate exposure with frequent negotiation stalemates.
  - Common injuries: shoulder, neck, back; surgical claims present.
- - Complex claims needing litigation-focused, negotiation-savvy law firms."
+ - Complex claims needing litigation-focused, negotiation-savvy law firms.",20
 "Carter & Murphy, LLP",1412598.41,79,9984.97,495.53,8519.29,18281.31,95557.28,83776.26,15638.94,954.91,1,1,1,1,0,0.877,1258.42,11.22,3,Efficient Volume Handlers,['MA']," - Low severity, single-vehicle, disputed liability claims  
  - Involves surgical intervention for shoulder injury  
- - Requires strategic negotiation and lien resolution expertise"
-"Mitchell & Collins, LLP",390441.85,37,3630.19,442.67,2578.67,6483.64,32925.12,26473.58,5349.93,994.61,0,1,1,1,0,0.804,860.09,12.77,2,Outcome Specialists,,#N/A
+ - Requires strategic negotiation and lien resolution expertise",1
+"Mitchell & Collins, LLP",390441.85,37,3630.19,442.67,2578.67,6483.64,32925.12,26473.58,5349.93,994.61,0,1,1,1,0,0.804,860.09,12.77,2,Outcome Specialists,,#N/A,
 "Mitchell & Edwards, LLP",353307,205,5848.05,3238.41,5530.92,24820.41,56008.96,37470.58,17694.19,1158.09,1,1,1,0,0,0.669,269.1,10.13,3,Efficient Volume Handlers,"['CT', 'ME']"," - High complexity with coverage and liability disputes
  - Frequent attorney involvement and chronic pain claims
- - Best suited for firms specializing in complex litigation"
+ - Best suited for firms specializing in complex litigation",1
 "Roberts, Thompson & Partners",167950.46,89,2081.81,2695.72,5276.56,18010.57,54354.19,41214.04,12917.87,1076.01,1,1,0,1,1,0.758,608.22,10.3,3,Efficient Volume Handlers,"['MI', 'CT', 'NY']"," - Moderate severity with frequent disputes over coverage limits  
  - Soft tissue neck injuries common; ongoing medical treatment  
- - Complex claims; suited for firms skilled in coverage disputes"
-"Foster & Brown, LLP",311105.66,62,948.88,2059.54,1113.23,33277.77,13186.03,11450.76,30832.55,3387.89,1,1,1,1,0,0.918,681.99,11.84,0,High-Value Core Firms,,#N/A
+ - Complex claims; suited for firms skilled in coverage disputes",1
+"Foster & Brown, LLP",311105.66,62,948.88,2059.54,1113.23,33277.77,13186.03,11450.76,30832.55,3387.89,1,1,1,1,0,0.918,681.99,11.84,0,High-Value Core Firms,,#N/A,
 "Henderson, Mitchell & Campbell, P.C.",1271321.34,155,8501.79,167.45,7083.94,12657.29,75612.99,50508.06,11002.78,816.96,0,0,1,0,1,0.668,396.84,10.67,3,Efficient Volume Handlers,"['CT', 'GA', 'NY', 'MI']"," - High claim complexity with extensive documentation and disputes  
  - Common injuries: neck, back pain; soft tissue injuries  
- - Best suited for firms experienced in fraud and complex negotiations"
+ - Best suited for firms experienced in fraud and complex negotiations",1
 Jackson Parker Law Group,792573.72,170,1299.51,1445.64,1515.19,10960.46,15442.47,10063.87,9195.66,1602.62,0,0,1,1,1,0.702,113.29,10.19,0,High-Value Core Firms,['MA']," - Single vehicle, neck injuries, Massachusetts jurisdiction  
  - Pre-existing conditions complicate medical treatment assessment  
- - Arbitration requested, active negotiation with claimant representative"
-Walker Hughes Law Group,744201.94,38,2938.22,653.71,2549.04,17994.28,25390.62,17894.87,15099.75,1635.02,0,0,1,1,0,0.705,868.28,9.96,1,High-Cost/ Underperformers,,#N/A
+ - Arbitration requested, active negotiation with claimant representative",2
+Walker Hughes Law Group,744201.94,38,2938.22,653.71,2549.04,17994.28,25390.62,17894.87,15099.75,1635.02,0,0,1,1,0,0.705,868.28,9.96,1,High-Cost/ Underperformers,,#N/A,
 "Baker & Mitchell, LLP",580675.03,146,2568.45,2659.55,1668.19,19375.37,23072.24,19048.64,14033.83,2737.3,0,1,1,1,0,0.876,226.59,13.83,0,High-Value Core Firms,['CT']," - Low severity with single vehicle involvement  
  - Shoulder injury requiring surgery; medical disputes present  
- - Arbitration likely; requires litigation-experienced law firm"
+ - Arbitration likely; requires litigation-experienced law firm",2
 "Baker, Jackson & Williams, P.C.",375497.13,214,5654.88,932.43,5557.46,12605.25,53550.74,45892.35,10175.37,2740.52,1,1,0,1,1,0.857,262,9.64,3,Efficient Volume Handlers,"['IL', 'IN', 'ME']"," - Low severity, single-vehicle, soft tissue neck injuries
  - Frequent attorney involvement, extended litigation process
- - Best suited for firms skilled in complex negotiations"
+ - Best suited for firms skilled in complex negotiations",2
