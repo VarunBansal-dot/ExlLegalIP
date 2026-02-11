@@ -41,46 +41,50 @@ def login():
             use_container_width=True
         )
 
-    # ---------------- RIGHT SIDE (Logo + Login) ----------------
+    # ---------------- RIGHT SIDE (Centered Logo + Login) ----------------
     with col2:
 
-        # Create inner columns for right alignment
-        logo_col1, logo_col2 = st.columns([1, 1])
+        # Center container
+        center_col1, center_col2, center_col3 = st.columns([1, 2, 1])
 
-        with logo_col2:
+        with center_col2:
             st.image("exl logo.png", width=300)
 
-        st.markdown("""
-        <div style="
-            font-size: 30px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            background: linear-gradient(90deg, #2563eb, #06b6d4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-top: 20px;
-        ">
-        Claims Litigation360
-        </div>
-        """, unsafe_allow_html=True)
+            st.markdown("""
+            <div style="
+                font-size: 30px;
+                font-weight: 700;
+                letter-spacing: 1px;
+                background: linear-gradient(90deg, #2563eb, #06b6d4);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                margin-top: 20px;
+                text-align: center;
+            ">
+            Claims Litigation360
+            </div>
+            """, unsafe_allow_html=True)
 
-        # st.caption("AI-Driven Law Firm Optimization Platform")
+            st.markdown(
+                "<div style='text-align:center; margin-top:5px;'>AI-Driven Law Firm Optimization Platform</div>",
+                unsafe_allow_html=True
+            )
 
-        st.markdown("---")
+            st.markdown("<br>", unsafe_allow_html=True)
 
-        username = st.text_input("Username")
-        password = st.text_input("Password", type="password")
+            username = st.text_input("Username")
+            password = st.text_input("Password", type="password")
 
-        login_btn = st.button("Login", use_container_width=True)
+            login_btn = st.button("Login", use_container_width=True)
 
-        if login_btn:
-            if username in USER_CREDENTIALS and USER_CREDENTIALS[username] == password:
-                st.session_state.logged_in = True
-                st.session_state.username = username
-                st.success(f"Welcome, {username}")
-                st.rerun()
-            else:
-                st.error("Invalid username or password")
+            if login_btn:
+                if username in USER_CREDENTIALS and USER_CREDENTIALS[username] == password:
+                    st.session_state.logged_in = True
+                    st.session_state.username = username
+                    st.success(f"Welcome, {username}")
+                    st.rerun()
+                else:
+                    st.error("Invalid username or password")
 
 
 if not st.session_state.logged_in:
