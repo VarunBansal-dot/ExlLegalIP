@@ -37,7 +37,7 @@ def login():
     # ---------------- LEFT SIDE (Image) ----------------
     with col1:
         st.image(
-            "litigation_ai.jpg",
+            "litigation_ai2.png",
             use_container_width=True
         )
 
