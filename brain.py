@@ -32,7 +32,7 @@ if "logged_in" not in st.session_state:
 
 def login():
 
-    col1, col2 = st.columns([1.2, 1], gap="large")
+    col1, col2 = st.columns([1.8, 1], gap="large")
 
     # ---------------- LEFT SIDE (Image) ----------------
     with col1:
