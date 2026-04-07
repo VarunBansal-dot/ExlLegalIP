@@ -37,8 +37,11 @@ def login():
     # ---------------- LEFT SIDE (Image) ----------------
     with col1:
         st.image(
+
             "litigation_ai2.png",
             use_container_width=True
+
+
         )
 
     # ---------------- RIGHT SIDE (Centered Logo + Login) ----------------
@@ -286,16 +289,17 @@ with st.container():
     # data_path = 'claims_only_Data.csv'
     # data_path = "Syntheticdataset_litigation.csv"
     data_path = "merged_file_1.csv"
-    Notes_path = "Notes1.csv"
+    # Notes_path = "Notes1.csv"
+    Notes_path = "Claim_Notes.csv"
+
     att_data_path = "atty_rep_model_predictions.csv"
 
     @st.cache_data(ttl=0)
     def load_data():
         cdf = pd.read_csv(data_path)
-        ndf = pd.read_csv(Notes_path, sep=',')
-        df = cdf.merge(ndf[['Claim_Number', 'Claims_Notes',
-                       'Summary']], how='left', on='Claim_Number')
-
+        ndf = pd.read_csv(Notes_path, sep=',', encoding='cp1252')
+        df = cdf.merge(ndf[['Claim_Number', 'Claims_Notes']], how='left', on='Claim_Number')
+        print(df.columns)
         df['ML_SCORE'] = round(df['ML_SCORE'], 2)
 
         if 'User_Action' not in df.columns:
@@ -303,8 +307,9 @@ with st.container():
         if 'User_Action_Details' not in df.columns:
             df['User_Action_Details'] = ''
         return df
+    
     def att_load_data():
-        df = pd.read_csv(att_data_path)
+        df = pd.read_csv(att_data_path,encoding='cp1252')
         if 'User_Action' not in df.columns:
             df['User_Action'] = ''
         if 'User_Action_Details' not in df.columns:
@@ -520,7 +525,8 @@ if selected_screen == "Attorney Rep Model Referrals":
             if show_summary:
                 with st.spinner("Generating summary using LLM..."):
                     # Pass the claim notes (or whatever column contains raw notes)
-                    summary_text = llm(row['Claim Note'])
+                    # summary_text = llm(row['Claim Note'])
+                    summary_text = row['Claim Note']
 
                     st.text_area(
                         "Claim Notes Summary",
@@ -817,7 +823,8 @@ elif selected_screen == "Attorney Rep Reviewed Claims":
             if show_summary:
                 with st.spinner("Generating summary using LLM..."):
                     # Pass the claim notes (or whatever column contains raw notes)
-                    summary_text = llm(row['Claim Note'])
+                    # summary_text = llm(row['Claim Note'])
+                    summary_text = row['Claim Note']
 
                     st.text_area(
                         "Claim Notes Summary",
@@ -1094,7 +1101,8 @@ elif selected_screen == "Legal Propensity Model Referrals":
             if show_summary:
                 with st.spinner("Generating summary using LLM..."):
                     # Pass the claim notes (or whatever column contains raw notes)
-                    summary_text = llm(row['Claims_Notes'])
+                    # summary_text = llm(row['Claims_Notes'])
+                    summary_text = row['Claims_Notes']
 
                     st.text_area(
                         "Claim Notes Summary",
@@ -1399,7 +1407,8 @@ elif selected_screen == "Legal Propensity Reviewed Claims":
             if show_summary:
                 with st.spinner("Generating summary using LLM..."):
                     # Pass the claim notes (or whatever column contains raw notes)
-                    summary_text = llm(row['Claims_Notes'])
+                    # summary_text = llm(row['Claims_Notes'])
+                    summary_text = row['Claims_Notes']
 
                     st.text_area(
                         "Claim Notes Summary",
